@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:homework_34/core/client.dart';
-import 'package:homework_34/data/models/home/category_model.dart';
+import 'package:homework_34/data/models/onbording_models/allergic_model.dart';
 
-class CategoryViewModel extends ChangeNotifier {
-  CategoryViewModel() {
+class AllergicVewModel extends ChangeNotifier {
+  AllergicVewModel() {
     fetchCategories();
   }
 
-  List<CategoryModel> category = [];
+  List<AllergicModel> allergic = [];
   bool isLoading = true;
   String? error;
 
@@ -17,10 +17,10 @@ class CategoryViewModel extends ChangeNotifier {
       error = null;
       notifyListeners();
 
-      var response = await dio.get('/categories/list');
+      var response = await dio.get('/allergic/list');
       if (response.statusCode == 200) {
-        category = (response.data as List)
-            .map((x) => CategoryModel.fromJson(x))
+        allergic = (response.data as List)
+            .map((x) => AllergicModel.fromJson(x))
             .toList();
       } else {
         error = "Xato statuslar: ${response.statusCode}";

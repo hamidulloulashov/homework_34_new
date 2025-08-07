@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:homework_34/core/utils/theme/app_theme.dart';
-import 'package:homework_34/features/onbording/widgets/app_bar_widget.dart';
-import 'package:homework_34/features/onbording/widgets/bottom_navigator.dart';
+import 'package:homework_34/features/category.dart/widget/app_bar_widget.dart';
+import 'package:homework_34/features/category.dart/widget/bottom_navigator.dart';
 import 'package:provider/provider.dart';
-import 'package:homework_34/features/onbording/managers/category_view_model.dart';
-import 'package:homework_34/features/onbording/pages/details.dart';
+import 'package:homework_34/features/category.dart/managers/category_view_model.dart';
+import 'package:homework_34/features/category.dart/pages/details.dart';
 
 class CategoriesPage extends StatelessWidget {
   const CategoriesPage({super.key, required this.name});
   final String name;
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(

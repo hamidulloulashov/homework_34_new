@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:homework_34/core/client.dart';
-import 'package:homework_34/data/models/home/detail_model.dart';
+import 'package:homework_34/data/models/category_models/detail_model.dart';
 
 class DetailsViewModel extends ChangeNotifier {
   List<RecipeModel> recipes = [];

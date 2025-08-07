@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:homework_34/core/rout_names.dart';
-import 'package:homework_34/features/onbording/pages/categories_page.dart';
-import 'package:homework_34/features/onbording/pages/details.dart';
+import 'package:homework_34/features/category.dart/pages/categories_page.dart';
+import 'package:homework_34/features/category.dart/pages/details.dart';
 
 class RouterClass {
   GoRouter router = GoRouter(
