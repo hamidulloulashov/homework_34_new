@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:homework_34/core/utils/theme/app_theme.dart';
-import 'package:homework_34/features/category.dart/widget/bottom_navigator.dart';
+import 'package:homework_34/features/category/widget/bottom_navigator.dart';
 
 class RecipeDetailsPage extends StatelessWidget {
   final dynamic recipe;

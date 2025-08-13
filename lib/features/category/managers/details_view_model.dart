@@ -6,7 +6,6 @@ class DetailsViewModel extends ChangeNotifier {
   List<RecipeModel> recipes = [];
   bool isLoading = false;
   String? error;
-
   Future<void> fetchRecipes(int categoryId) async {
     try {
       isLoading = true;

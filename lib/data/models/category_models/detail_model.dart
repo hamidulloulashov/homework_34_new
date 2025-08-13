@@ -7,7 +7,6 @@ class RecipeModel {
   final String photo;
   final double timeRequired;
   final int rating;
-
   RecipeModel({
     required this.id,
     required this.categoryId,
@@ -18,7 +17,6 @@ class RecipeModel {
     required this.timeRequired,
     required this.rating,
   });
-
   factory RecipeModel.fromJson(Map<String, dynamic> json) {
     return RecipeModel(
       id: (json["id"] as num).toInt(),

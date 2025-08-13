@@ -17,7 +17,7 @@ class AllergicVewModel extends ChangeNotifier {
       error = null;
       notifyListeners();
 
-      var response = await dio.get('/allergic/list');
+      var response = await dio.get('/categories/list');
       if (response.statusCode == 200) {
         allergic = (response.data as List)
             .map((x) => AllergicModel.fromJson(x))

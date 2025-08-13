@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:homework_34/core/utils/theme/app_theme.dart';
-import 'package:homework_34/features/category.dart/pages/recipe_deatils.dart';
-import 'package:homework_34/features/category.dart/widget/bottom_navigator.dart';
+import 'package:homework_34/features/category/pages/recipe_deatils.dart';
+import 'package:homework_34/features/category/widget/bottom_navigator.dart';
 import 'package:provider/provider.dart';
-import 'package:homework_34/features/category.dart/managers/details_view_model.dart';
+import 'package:homework_34/features/category/managers/details_view_model.dart';
 
 class DetailsPage extends StatefulWidget {
   final int categoryId;

@@ -19,18 +19,36 @@
 //   }
 // }
 
-import 'package:flutter/material.dart';
-import 'package:homework_34/features/onbording/pages/pagveiw_page.dart';
+// import 'package:flutter/material.dart';
+// import 'package:homework_34/features/onbording/pages/pagveiw_page.dart';
 
-void main(List<String> args) {
-  runApp(const MyWidget());
+// void main(List<String> args) {
+//   runApp(const MyWidget());
+// }
+
+// class MyWidget extends StatelessWidget {
+//   const MyWidget({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(debugShowCheckedModeBanner: false, home: PagveiwPage());
+//   }
+// }
+import 'package:flutter/material.dart';
+import 'package:homework_34/core/router.dart';
+
+void main() {
+  runApp(const MyApp());
 }
 
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: PagveiwPage());
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      routerConfig: router,
+    );
   }
 }
