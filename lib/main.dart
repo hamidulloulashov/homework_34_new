@@ -34,6 +34,7 @@
 //     return MaterialApp(debugShowCheckedModeBanner: false, home: PagveiwPage());
 //   }
 // }
+
 import 'package:flutter/material.dart';
 import 'package:homework_34/core/router.dart';
 
@@ -52,3 +53,19 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+// import 'package:flutter/material.dart';
+// import 'package:homework_34/features/trending_news/pages/trending_recipes_page.dart';
+
+// void main(List<String> args) {
+//   runApp(MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(home: TrendingRecipesPage());
+//   }
+// }
