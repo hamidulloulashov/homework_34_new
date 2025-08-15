@@ -40,4 +40,9 @@ class RegisterModel {
       'password': password,
     };
   }
+
+  @override
+  String toString() {
+    return 'RegisterModel(username: $username, firstName: $firstName, lastName: $lastName, email: $email, phoneNumber: $phoneNumber, birthDate: $birthDate, password: $password)';
+  }
 }

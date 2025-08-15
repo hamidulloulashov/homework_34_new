@@ -1,14 +1,36 @@
 import 'package:go_router/go_router.dart';
+import 'package:homework_34/data/models/trending_repostories_models/detail_model.dart';
 import 'package:homework_34/features/auth/pages/login_page.dart';
 import 'package:homework_34/features/auth/pages/register_page.dart';
+import 'package:homework_34/features/trending_news/pages/trending_recipes_page.dart';
+import 'package:homework_34/features/trending_news/widgets/detail_wedget.dart';
+import 'package:flutter/material.dart';
 
 final GoRouter router = GoRouter(
   routes: [
-    GoRoute(path: '/', name: 'login', builder: (context, state) => LoginPage()),
+    // GoRoute(path: '/', name: 'login', builder: (context, state) => LoginPage()),
+    // GoRoute(
+    //   path: '/register',
+    //   name: 'register',
+    //   builder: (context, state) => RegisterPage(),
+    // ),
+    // GoRoute(
+    //   path: '/home',
+    //   name: 'home',
+    //   builder: (context, state) => const TrendingRecipesPage(),
+    // ),
     GoRoute(
-      path: '/register',
-      name: 'register',
-      builder: (context, state) => RegisterPage(),
+      path: '/detail',
+      name: 'detail',
+      builder: (context, state) {
+        final recipe = state.extra as DetailModel?;
+        if (recipe == null) {
+          return const Scaffold(
+            body: Center(child: Text("Ma'lumot topilmadi")),
+          );
+        }
+        return DetailPage(recipe: recipe);
+      },
     ),
   ],
 );

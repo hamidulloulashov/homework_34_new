@@ -1,4 +1,4 @@
-class TrendingModels {
+class MostModel {
   final int id;
   final int categoryId;
   final String title;
@@ -7,7 +7,7 @@ class TrendingModels {
   final String photo;
   final int timeRequired;
   final int rating;
-  TrendingModels({
+  MostModel({
     required this.id,
     required this.categoryId,
     required this.title,
@@ -17,8 +17,8 @@ class TrendingModels {
     required this.timeRequired,
     required this.rating,
   });
-  factory TrendingModels.fromJson(Map<String, dynamic> json) {
-    return TrendingModels(
+  factory MostModel.fromJson(Map<String, dynamic> json) {
+    return MostModel(
       id: json['id'],
       categoryId: json['categoryId'],
       title: json['title'],
