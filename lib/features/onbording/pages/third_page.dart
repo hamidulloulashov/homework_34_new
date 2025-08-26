@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:homework_34/core/utils/theme/colors.dart';
+import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/features/onbording/managers/third_view_model.dart';
 import 'package:homework_34/features/onbording/pages/cooking_livel_page.dart';
 import 'package:provider/provider.dart';
-
 class ThirdPage extends StatelessWidget {
   const ThirdPage({super.key});
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => ThirdViewModel(),
       builder: (context, child) => Scaffold(
-        backgroundColor: AppColors.primary,
+        appBar: CustomAppBar(arrow:'assets/arrow.png'),
         body: Consumer<ThirdViewModel>(
           builder: (context, vm, child) {
             if (vm.third.isEmpty) {
@@ -20,25 +19,8 @@ class ThirdPage extends StatelessWidget {
                 child: CircularProgressIndicator(color: Colors.white),
               );
             }
-
             return Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 40, left: 12),
-                  child: Align(
-                    alignment: Alignment.centerLeft,
-                    child: IconButton(
-                      icon: Image.asset(
-                        "assets/arrow.png",
-                        width: 30,
-                        height: 14,
-                      ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ),
-                ),
                 Expanded(
                   child: GridView.builder(
                     padding: const EdgeInsets.all(12),
@@ -67,14 +49,14 @@ class ThirdPage extends StatelessWidget {
                 Text(
                   "Welcome",
                   style: TextStyle(
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.inverseSurface,
                     fontWeight: FontWeight.w600,
                     fontSize: 22,
                   ),
                 ),
                 Text(
                   "Find the best recipes that the world can provide you\nalso with every step that you can learn to increase\nyour cooking skills.",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle( color: Theme.of(context).colorScheme.inverseSurface,),
                 ),
                 SizedBox(height: 40),
                 Padding(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/data/repostories/onboarding_repostory.dart';
 import 'package:provider/provider.dart';
 import 'package:homework_34/core/utils/theme/colors.dart';
@@ -18,7 +19,7 @@ class SecondPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => SecondViewModel(repository: repository),
       builder: (context, child) => Scaffold(
-        backgroundColor: AppColors.primary,
+       appBar: CustomAppBar(arrow: 'assets/arrow.png',),
         body: Consumer<SecondViewModel>(
           builder: (context, vm, child) {
             if (vm.isLoading) {
@@ -47,9 +48,9 @@ class SecondPage extends StatelessWidget {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          AppColors.primary.withOpacity(1),
+                          Theme.of(context).colorScheme.surface,
                           Colors.transparent,
-                          AppColors.primary.withOpacity(1),
+                           Theme.of(context).colorScheme.surface,
                         ],
                         stops: const [0.2, 0.4, 1.0],
                       ),
@@ -57,24 +58,16 @@ class SecondPage extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  top: 40,
-                  left: 10,
-                  child: IconButton(
-                    icon: Image.asset("assets/arrow.png", width: 30, height: 14),
-                    onPressed: () => Navigator.pop(context),
-                  ),
-                ),
-                Positioned(
-                  top: 90,
-                  left: 30,
-                  right: 10,
+                  
+                  left: 20,
+                  right: 20,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children:  [
                       Text(
                         "Get an increase your skills",
                         style: TextStyle(
-                          color: Colors.white,
+                           color: Theme.of(context).colorScheme.inverseSurface,
                           fontWeight: FontWeight.w600,
                           fontSize: 26,
                         ),
@@ -83,7 +76,7 @@ class SecondPage extends StatelessWidget {
                       Text(
                         "Learn essential cooking techniques at your own pace.",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.inverseSurface,
                           fontWeight: FontWeight.w400,
                           fontSize: 12,
                         ),

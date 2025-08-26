@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:homework_34/core/utils/theme/colors.dart';
-import 'package:homework_34/features/category/widgets/app_bar_widget.dart';
-import 'package:homework_34/features/trending_news/widgets/bottom_navigator_widget.dart';
-import 'package:homework_34/features/trending_news/widgets/favourite_widget.dart';
+import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
+import 'package:homework_34/core/widgets/bottom_navigator_widget.dart';
+import 'package:homework_34/core/widgets/favourite_widget.dart';
 import 'package:homework_34/features/your_recipies/managers/your_recipeis_veiw_model.dart';
 import 'package:provider/provider.dart';
-
 class YourRecipeisPage extends StatelessWidget {
   const YourRecipeisPage({super.key});
-
   @override
   Widget build(BuildContext context) {
     final viewModel = context.watch<YourRecipeisVeiwModel>();
@@ -24,13 +22,8 @@ class YourRecipeisPage extends StatelessWidget {
     if (viewModel.recipes.isEmpty) {
       return const Center(child: Text("Hech qanday recipe topilmadi"));
     }
-
     return Scaffold(
-      backgroundColor: AppColors.primary,
-      appBar: AppBar(
-          backgroundColor: AppColors.primary,
-          title: AppBarWidget(),
-        ),
+      appBar: CustomAppBar(arrow: 'assets/arrow.png',first: 'assets/notifaction.png',second: 'assets/search.png',containerColor: AppColors.container,),
       body: Column(
         children: [
           Container(
@@ -60,6 +53,7 @@ class YourRecipeisPage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 15),
                     child: Card(
+                      
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
@@ -81,15 +75,16 @@ class YourRecipeisPage extends StatelessWidget {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(bottom: 10, left: 20),
+                                padding:  EdgeInsets.only(bottom: 10, left: 20),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       recipe.title,
-                                      style: const TextStyle(
+                                      style:  TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 14,
+                                         color: Theme.of(context).colorScheme.inverseSurface,
                                       ),
                                       maxLines: 1,
                                       overflow: TextOverflow.ellipsis,

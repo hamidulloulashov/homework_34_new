@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:homework_34/core/utils/theme/colors.dart';
+import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/data/models/trending_repostories_models/detail_model.dart';
 
 class DetailPage extends StatelessWidget {
@@ -10,17 +10,7 @@ class DetailPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primary,
-      appBar: AppBar(
-        backgroundColor: AppColors.primary,
-        title: Text(recipe.title, style: TextStyle(color: AppColors.text)),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: AppColors.text),
-          onPressed: () {
-            GoRouter.of(context).pop();
-          },
-        ),
-      ),
+      appBar: CustomAppBar(title: recipe.title, arrow: 'assets/arrow.png',),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(15),
         child: Column(

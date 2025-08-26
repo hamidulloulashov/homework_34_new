@@ -45,7 +45,6 @@ class AllRepository {
     final result = await apiClient.get<List<dynamic>>('/recipes/list');
     return result.fold(
       (error) {
-        // Log chiqarish
         print('❌ API Error in getRecipesList: $error');
         return Result.error(error);
       },

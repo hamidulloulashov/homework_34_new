@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:homework_34/core/client.dart';
 import 'package:homework_34/core/utils/theme/colors.dart';
+import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/data/repostories/community_repostory.dart';
 import 'package:homework_34/features/community/managers/community_view_model.dart';
 import 'package:homework_34/features/community/widgets/community_bottomappbar_widget.dart';
-import 'package:homework_34/features/trending_news/widgets/bottom_navigator_widget.dart';
-import 'package:homework_34/features/trending_news/widgets/favourite_widget.dart';
+import 'package:homework_34/core/widgets/bottom_navigator_widget.dart';
+import 'package:homework_34/core/widgets/favourite_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -41,7 +42,6 @@ class _CommunityPageState extends State<CommunityPage> {
         builder: (context, vm, child) {
           if (vm.isLoading) {
             return Scaffold(
-              backgroundColor: AppColors.primary,
               body: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(16),
@@ -85,42 +85,20 @@ class _CommunityPageState extends State<CommunityPage> {
           }
 
           return Scaffold(
-            backgroundColor: AppColors.primary,
-            appBar: AppBar(
-              actions: [
-                Row(
-                  children: [
-                    Image.asset("assets/arrow.png", width: 20, height: 14),
-                    const SizedBox(width: 80),
-                    Text(
-                      "Community",
-                      style: TextStyle(
-                        color: AppColors.text,
-                        fontSize: 20,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const SizedBox(width: 80),
-                    Image.asset("assets/notifaction.png", width: 28, height: 28),
-                    const SizedBox(width: 8),
-                    Image.asset("assets/search.png", width: 28, height: 28),
-                    const SizedBox(width: 10),
-                  ],
-                ),
-              ],
-              backgroundColor: AppColors.primary,
-              bottom: const CommunityWidget(),
-            ),
+            appBar: CustomAppBar(title: "Comunity", arrow: "assets/arrow.png",first: "assets/notifaction.png",second: "assets/search.png",containerColor: AppColors.container,),
             bottomNavigationBar: const BottomNavigatorNews(),
             body: SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.only(
-                  right: 36,
+                  right: 30,
                   left: 36,
                   bottom: 100,
                 ),
                 child: Column(
+                  
                   children: [
+                    SizedBox(height: 20,),
+                     CommunityWidget(),
                     const SizedBox(height: 22),
                     ...List.generate(vm.recipes.length, (index) {
                       final items = vm.recipes[index];
@@ -164,7 +142,7 @@ class _CommunityPageState extends State<CommunityPage> {
                                       style: TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w400,
-                                        color: AppColors.white,
+                                        color: AppColors.text,
                                       ),
                                     ),
                                     Text(
@@ -172,7 +150,7 @@ class _CommunityPageState extends State<CommunityPage> {
                                       style: TextStyle(
                                         fontSize: 12,
                                         fontWeight: FontWeight.w400,
-                                        color: AppColors.white,
+                                        color: AppColors.text,
                                       ),
                                     ),
                                   ],
@@ -181,7 +159,9 @@ class _CommunityPageState extends State<CommunityPage> {
                             ),
                             const SizedBox(height: 15),
                             Column(
+                              
                               children: [
+                                
                                 ClipRRect(
                                   borderRadius: const BorderRadius.only(
                                     topRight: Radius.circular(14),
@@ -225,99 +205,96 @@ class _CommunityPageState extends State<CommunityPage> {
                                       bottomLeft: Radius.circular(14),
                                     ),
                                   ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 5, left: 5),
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                          children: [
-                                            Text(
-                                              items.title,
-                                              style: TextStyle(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w600,
-                                                color: AppColors.white,
-                                              ),
-                                            ),
-                                            const SizedBox(width: 5),
-                                            Image.asset(
-                                              "assets/star.png",
+                                  child: Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Text(
+                                            items.title,
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w600,
                                               color: AppColors.white,
-                                              width: 10,
                                             ),
-                                            Text(
-                                              items.rating.toString(),
+                                          ),
+                                          const SizedBox(width: 5),
+                                          Image.asset(
+                                            "assets/star.png",
+                                            color: AppColors.white,
+                                            width: 10,
+                                          ),
+                                          Text(
+                                            items.rating.toString(),
+                                            style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w400,
+                                              color: AppColors.white,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 258,
+                                            height: 45,
+                                            child: Text(
+                                              items.description,
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
                                               style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w400,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w300,
                                                 color: AppColors.white,
                                               ),
                                             ),
-                                          ],
-                                        ),
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                              width: 258,
-                                              height: 45,
-                                              child: Text(
-                                                items.description,
-                                                maxLines: 2,
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w300,
-                                                  color: AppColors.white,
-                                                ),
+                                          ),
+                                          Column(
+                                            children: [
+                                              Row(
+                                                children: [
+                                                  Image.asset(
+                                                    "assets/alarm.png",
+                                                    color: AppColors.white,
+                                                    width: 10,
+                                                  ),
+                                                  SizedBox(width: 3,),
+                                                  Text(
+                                                    '${items.timeRequired} min',
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color: AppColors.white,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                            ),
-                                            Column(
-                                              children: [
-                                                Row(
-                                                  children: [
-                                                    Image.asset(
-                                                      "assets/alarm.png",
+                                              Row(
+                                                children: [
+                                                  Text(
+                                                    items.reviewsCount
+                                                        .toString(),
+                                                    style: TextStyle(
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.w400,
                                                       color: AppColors.white,
-                                                      width: 10,
                                                     ),
-                                                    SizedBox(width: 3,),
-                                                    Text(
-                                                      '${items.timeRequired} min',
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: AppColors.white,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Row(
-                                                  children: [
-                                                    Text(
-                                                      items.reviewsCount
-                                                          .toString(),
-                                                      style: TextStyle(
-                                                        fontSize: 12,
-                                                        fontWeight:
-                                                            FontWeight.w400,
-                                                        color: AppColors.white,
-                                                      ),
-                                                    ),
-                                                    SizedBox(width: 3,),
-                                                    Image.asset(
-                                                      "assets/message.png",
-                                                      color: AppColors.white,
-                                                      width: 10,
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
+                                                  ),
+                                                  SizedBox(width: 3,),
+                                                  Image.asset(
+                                                    "assets/message.png",
+                                                    color: AppColors.white,
+                                                    width: 10,
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],

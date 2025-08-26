@@ -2,12 +2,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:homework_34/core/utils/theme/colors.dart';
 import 'package:homework_34/features/trending_news/managers/most_view_model.dart';
-import 'package:homework_34/features/trending_news/widgets/favourite_widget.dart';
+import 'package:homework_34/core/widgets/favourite_widget.dart';
 import 'package:provider/provider.dart';
 
 class MostWidget extends StatelessWidget {
   const MostWidget({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Consumer<MostViewModel>(

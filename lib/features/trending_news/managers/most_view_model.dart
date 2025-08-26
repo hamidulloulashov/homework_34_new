@@ -14,9 +14,7 @@ class MostViewModel extends ChangeNotifier {
     isLoading = true;
     error = null;
     notifyListeners();
-
     final result = await repository.getTrendingRecipes();
-
     result.fold(
       (err) {
         error = err.toString();

@@ -1,26 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:homework_34/core/utils/theme/colors.dart';
+import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/data/models/trending_repostories_models/detail_model.dart';
 
 class DetailPage extends StatelessWidget {
   final DetailModel recipe;
   const DetailPage({super.key, required this.recipe});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(recipe.title),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            if (GoRouter.of(context).canPop()) {
-              GoRouter.of(context).pop();
-            } else {
-              GoRouter.of(context).go('/');
-            }
-          },
-        ),
+      appBar: CustomAppBar(
+        title: recipe.title,
+        arrow: "assets/arrow.png",
+        onFirstPressed: () {
+          if (GoRouter.of(context).canPop()) {
+            GoRouter.of(context).pop();
+          } else {
+            GoRouter.of(context).go('/');
+          }
+        },
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(15),
@@ -38,7 +37,11 @@ class DetailPage extends StatelessWidget {
             const SizedBox(height: 10),
             Text(
               recipe.title,
-              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: AppColors.text,
+              ),
             ),
             const SizedBox(height: 10),
             Row(
@@ -54,7 +57,10 @@ class DetailPage extends StatelessWidget {
                 Expanded(
                   child: Text(
                     "${recipe.user.firstName} ${recipe.user.lastName} (@${recipe.user.username})",
-                    style: const TextStyle(fontSize: 14, color: Colors.black54),
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: AppColors.text,
+                    ),
                   ),
                 ),
               ],
@@ -62,22 +68,28 @@ class DetailPage extends StatelessWidget {
             const SizedBox(height: 15),
             Text(
               recipe.description,
-              style: const TextStyle(fontSize: 16),
+              style: const TextStyle(
+                fontSize: 16,
+                color: AppColors.text,
+              ),
             ),
             const SizedBox(height: 15),
             Row(
               children: [
-                const Icon(Icons.access_time, size: 16),
+                const Icon(Icons.access_time, size: 16, color: AppColors.text),
                 const SizedBox(width: 5),
-                Text("${recipe.timeRequired} min"),
+                Text("${recipe.timeRequired} min",
+                    style: const TextStyle(color: AppColors.text)),
                 const SizedBox(width: 20),
-                const Icon(Icons.emoji_events, size: 16),
+                const Icon(Icons.emoji_events, size: 16, color: AppColors.text),
                 const SizedBox(width: 5),
-                Text(recipe.difficulty),
+                Text(recipe.difficulty,
+                    style: const TextStyle(color: AppColors.text)),
                 const SizedBox(width: 20),
-                const Icon(Icons.star, size: 16, color: Colors.orange),
+                const Icon(Icons.star, size: 16, color: AppColors.text),
                 const SizedBox(width: 5),
-                Text(recipe.rating.toStringAsFixed(1)),
+                Text(recipe.rating.toStringAsFixed(1),
+                    style: const TextStyle(color: AppColors.text)),
               ],
             ),
           ],

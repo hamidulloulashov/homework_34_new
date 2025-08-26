@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/data/repostories/onboarding_repostory.dart';
 import 'package:provider/provider.dart';
 import 'package:homework_34/core/utils/theme/colors.dart';
@@ -17,16 +18,12 @@ class Cuisins extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => CusinsViewModel(repository: repository),
       builder: (context, child) => Scaffold(
-        backgroundColor: AppColors.primary,
-        appBar: AppBar(
-          backgroundColor: AppColors.primary,
-          elevation: 0,
-          leading: IconButton(
-            icon: Image.asset("assets/arrow.png", width: 30, height: 14),
-            onPressed: () => Navigator.pop(context),
-          ),
-          title: Padding(
-            padding: const EdgeInsets.only(top: 20),
+        appBar: CustomAppBar(arrow: 'assets/arrow.png',),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+             Padding(
+            padding: const EdgeInsets.only(top: 10, left: 80, bottom: 10),
             child: Stack(
               children: [
                 Container(
@@ -34,7 +31,7 @@ class Cuisins extends StatelessWidget {
                   height: 12,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.inverseSurface,
                   ),
                 ),
                 Positioned(
@@ -51,29 +48,24 @@ class Cuisins extends StatelessWidget {
               ],
             ),
           ),
-          centerTitle: true,
-        ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Padding(
+           Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Text(
                 "Select your cuisines preferences",
                 style: TextStyle(
-                  color: Colors.white,
+                 color: Theme.of(context).colorScheme.inverseSurface,
                   fontWeight: FontWeight.w600,
                   fontSize: 22,
                 ),
               ),
             ),
             const SizedBox(height: 30),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20,),
               child: Text(
                 "Please select your cuisines preferences for a\nbetter recommendations or you can skip it.",
                 style: TextStyle(
-                  color: Colors.white,
+                color: Theme.of(context).colorScheme.inverseSurface,
                   fontWeight: FontWeight.w400,
                 ),
               ),

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:homework_34/core/utils/theme/colors.dart';
+import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/data/models/category_models/detail_model.dart';
 import 'package:homework_34/features/reviews/widgets/sucsefull_leave_widget.dart';
-import 'package:homework_34/features/trending_news/widgets/bottom_navigator_widget.dart';
+import 'package:homework_34/core/widgets/bottom_navigator_widget.dart';
 class LeavePage extends StatefulWidget {
   final RecipeModel recipe;
   const LeavePage({super.key, required this.recipe});
@@ -17,23 +18,7 @@ class _LeavePageState extends State<LeavePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primary,
-      appBar: AppBar(
-        backgroundColor: AppColors.primary,
-        elevation: 0,
-        leading: IconButton(
-            icon: Image.asset("assets/arrow.png", width: 30,height: 14,),
-            onPressed: () => Navigator.pop(context),
-          ),
-        title:  Padding(
-          padding: const EdgeInsets.only(left: 55),
-          child: Text(
-            "Leave A Review",
-            style: TextStyle(color: AppColors.text),
-          ),
-        ),
-        iconTheme: const IconThemeData(color: Colors.white),
-      ),
+      appBar: CustomAppBar(title: "Leave A Review", arrow: "assets/arrow.png",),
       body: SingleChildScrollView( 
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -91,7 +76,7 @@ class _LeavePageState extends State<LeavePage> {
                             "assets/star.png",
                             color: index < _selectedRating
                                 ? AppColors.text
-                                : Colors.white24,
+                                : AppColors.textDark,
                           ),
                         ),
                       );
@@ -103,7 +88,7 @@ class _LeavePageState extends State<LeavePage> {
               padding: const EdgeInsets.only(right: 105),
               child: Text(
                 "Your overall rating",
-                style: TextStyle(color: Colors.white, fontSize: 12),
+                style: TextStyle(color: AppColors.text, fontSize: 12),
               ),
             ),
                 ],
@@ -123,7 +108,7 @@ class _LeavePageState extends State<LeavePage> {
                   borderSide: BorderSide.none,
                 ),
               ),
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.black),
             ),
             const SizedBox(height: 12),
             Row(
@@ -135,11 +120,11 @@ class _LeavePageState extends State<LeavePage> {
                  child: Icon(Icons.add, color: AppColors.text, size: 15,),
                 ),
                 SizedBox(width: 10,),
-                Text("Add Photo", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: AppColors.white),)
+                Text("Add Photo", style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500, color: AppColors.text),)
               ],
             ),
                 const SizedBox(height: 24),
-                      Text("Do you recommend this recipe?", style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: AppColors.white),),
+                      Text("Do you recommend this recipe?", style: TextStyle(fontSize: 12, fontWeight: FontWeight.w400, color: AppColors.text),),
                       SizedBox(height: 15,),
                   Row(
                     
@@ -154,7 +139,7 @@ class _LeavePageState extends State<LeavePage> {
             children: [
               Text(
                 "No",
-                style: TextStyle(color: AppColors.white),
+                style: TextStyle(color: AppColors.text),
               ),
               const SizedBox(width: 10),
               Container(
@@ -181,7 +166,7 @@ class _LeavePageState extends State<LeavePage> {
             children: [
               Text(
                 "Yes",
-                style: TextStyle(color: AppColors.white),
+                style: TextStyle(color: AppColors.text),
               ),
               const SizedBox(width: 10),
               Container(

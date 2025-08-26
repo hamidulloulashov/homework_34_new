@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:homework_34/core/utils/theme/colors.dart';
+import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/features/category/pages/recipe_deatils.dart';
-import 'package:homework_34/features/trending_news/widgets/bottom_navigator_widget.dart';
+import 'package:homework_34/core/widgets/bottom_navigator_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:homework_34/features/category/managers/details_view_model.dart';
 
@@ -54,24 +55,12 @@ class _DetailsPageState extends State<DetailsPage> {
       child: Consumer<DetailsViewModel>(
         builder: (context, vm, _) {
           return Scaffold(
-            backgroundColor: AppColors.primary,
-            appBar: AppBar(
-              backgroundColor: AppColors.primary,
-              centerTitle: true,
-              iconTheme: IconThemeData(color: AppColors.text),
-              title: Text(
-                selectedCategoryName,
-                style: TextStyle(
-                  color: AppColors.text,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              actions: [
-                Image.asset("assets/notifaction.png", width: 28, height: 28),
-                const SizedBox(width: 8),
-                Image.asset("assets/search.png", width: 28, height: 28),
-                const SizedBox(width: 12),
-              ],
+            appBar: CustomAppBar(
+              title: selectedCategoryName,
+              arrow: "assets/arrow.png",  
+              first: "assets/notifaction.png",
+              second: "assets/search.png",
+              containerColor: AppColors.container,
             ),
             body: Column(
               children: [
@@ -97,7 +86,7 @@ class _DetailsPageState extends State<DetailsPage> {
                           ),
                           selected: isSelected,
                           selectedColor: AppColors.text,
-                          backgroundColor: AppColors.primary,
+                          backgroundColor: Theme.of(context).colorScheme.background,
                           side: BorderSide.none,
                           showCheckmark: false,
                           onSelected: (_) {
@@ -106,8 +95,8 @@ class _DetailsPageState extends State<DetailsPage> {
                               selectedCategoryName = cat['name'];
                             });
                             context.read<DetailsViewModel>().fetchRecipes(
-                              selectedCategoryId,
-                            );
+                                  selectedCategoryId,
+                                );
                           },
                         ),
                       );
@@ -118,140 +107,141 @@ class _DetailsPageState extends State<DetailsPage> {
                   child: vm.isLoading
                       ? const Center(child: CircularProgressIndicator())
                       : vm.error != null
-                      ? Center(child: Text(vm.error!))
-                      : vm.recipes.isEmpty
-                      ? const Center(
-                          child: Text("Bu kategoriyada retsept yo'q"),
-                        )
-                      : GridView.builder(
-                          padding: const EdgeInsets.all(16),
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                crossAxisSpacing: 12,
-                                mainAxisSpacing: 12,
-                                childAspectRatio: 0.75,
-                              ),
-                          itemCount: vm.recipes.length,
-                          itemBuilder: (context, index) {
-                            final recipe = vm.recipes[index];
-                            return GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        RecipeDetailsPage(recipe: recipe),
+                          ? Center(child: Text(vm.error!))
+                          : vm.recipes.isEmpty
+                              ? const Center(
+                                  child: Text("Bu kategoriyada retsept yo'q"),
+                                )
+                              : GridView.builder(
+                                  padding: const EdgeInsets.all(16),
+                                  gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                    crossAxisCount: 2,
+                                    crossAxisSpacing: 12,
+                                    mainAxisSpacing: 12,
+                                    childAspectRatio: 0.75,
                                   ),
-                                );
-                              },
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(16),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.3),
-                                      spreadRadius: 2,
-                                      blurRadius: 8,
-                                      offset: const Offset(0, 4),
-                                    ),
-                                  ],
-                                ),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    ClipRRect(
-                                      borderRadius: const BorderRadius.vertical(
-                                        top: Radius.circular(16),
-                                      ),
-                                      child: Image.network(
-                                        recipe.photo,
-                                        fit: BoxFit.cover,
-                                        height: 120,
-                                        width: double.infinity,
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            recipe.title,
-                                            maxLines: 1,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 14,
-                                            ),
+                                  itemCount: vm.recipes.length,
+                                  itemBuilder: (context, index) {
+                                    final recipe = vm.recipes[index];
+                                    return GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                RecipeDetailsPage(recipe: recipe),
                                           ),
-                                          const SizedBox(height: 4),
-                                          Text(
-                                            recipe.description,
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: const TextStyle(
-                                              fontSize: 12,
-                                              color: Colors.grey,
+                                        );
+                                      },
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius: BorderRadius.circular(16),
+                                          boxShadow: [
+                                            BoxShadow(
+                                              color: Colors.grey.withOpacity(0.3),
+                                              spreadRadius: 2,
+                                              blurRadius: 8,
+                                              offset: const Offset(0, 4),
                                             ),
-                                          ),
-                                          const SizedBox(height: 6),
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Row(
+                                          ],
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            ClipRRect(
+                                              borderRadius: const BorderRadius.vertical(
+                                                top: Radius.circular(16),
+                                              ),
+                                              child: Image.network(
+                                                recipe.photo,
+                                                fit: BoxFit.cover,
+                                                height: 120,
+                                                width: double.infinity,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
                                                 children: [
-                                                  const Icon(
-                                                    Icons.star,
-                                                    color: Colors.orange,
-                                                    size: 14,
-                                                  ),
-                                                  const SizedBox(width: 2),
                                                   Text(
-                                                    recipe.rating.toString(),
+                                                    recipe.title,
+                                                    maxLines: 1,
+                                                    overflow: TextOverflow.ellipsis,
                                                     style: const TextStyle(
-                                                      fontSize: 12,
-                                                      color: Colors.orange,
+                                                      color: Colors.black,
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 14,
                                                     ),
                                                   ),
-                                                ],
-                                              ),
-                                              Row(
-                                                children: [
-                                                  const Icon(
-                                                    Icons.access_time,
-                                                    color: Colors.grey,
-                                                    size: 14,
-                                                  ),
-                                                  const SizedBox(width: 2),
+                                                  const SizedBox(height: 4),
                                                   Text(
-                                                    "${recipe.timeRequired} min",
+                                                    recipe.description,
+                                                    maxLines: 2,
+                                                    overflow: TextOverflow.ellipsis,
                                                     style: const TextStyle(
                                                       fontSize: 12,
                                                       color: Colors.grey,
                                                     ),
                                                   ),
+                                                  const SizedBox(height: 6),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.spaceBetween,
+                                                    children: [
+                                                      Row(
+                                                        children: [
+                                                          const Icon(
+                                                            Icons.star,
+                                                            color: Colors.orange,
+                                                            size: 14,
+                                                          ),
+                                                          const SizedBox(width: 2),
+                                                          Text(
+                                                            recipe.rating.toString(),
+                                                            style: const TextStyle(
+                                                              fontSize: 12,
+                                                              color: Colors.orange,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          const Icon(
+                                                            Icons.access_time,
+                                                            color: Colors.grey,
+                                                            size: 14,
+                                                          ),
+                                                          const SizedBox(width: 2),
+                                                          Text(
+                                                            "${recipe.timeRequired} min",
+                                                            style: const TextStyle(
+                                                              fontSize: 12,
+                                                              color: Colors.grey,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ],
                                               ),
-                                            ],
-                                          ),
-                                        ],
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    );
+                                  },
                                 ),
-                              ),
-                            );
-                          },
-                        ),
                 ),
-                BottomNavigatorNews(),
-                SizedBox(height: 30),
+              
               ],
             ),
+            bottomNavigationBar: BottomNavigatorNews(),
           );
         },
       ),

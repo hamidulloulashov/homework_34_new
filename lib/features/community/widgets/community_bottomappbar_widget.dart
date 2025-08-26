@@ -4,7 +4,6 @@ class CommunityWidget extends StatefulWidget implements PreferredSizeWidget {
   const CommunityWidget({super.key});
   @override
   Size get preferredSize => Size(double.infinity, 40);
-
   @override
   State<CommunityWidget> createState() => _CommunityBottomBarState();
 }
@@ -38,7 +37,7 @@ class _CommunityBottomBarState extends State<CommunityWidget> {
                       borderRadius: BorderRadius.circular(19),
                       color: isSelected == index
                           ? AppColors.text
-                          : AppColors.primary
+                          : AppColors.white
                     ),
                     child: Text(
                       items[index],

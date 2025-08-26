@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:homework_34/core/utils/theme/colors.dart';
+import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/data/models/top_chefs_models/most_model.dart';
 import 'package:homework_34/data/models/top_chefs_models/recipies_model.dart';
-import 'package:homework_34/features/trending_news/widgets/bottom_navigator_widget.dart';
-import 'package:homework_34/features/trending_news/widgets/favourite_widget.dart';
+import 'package:homework_34/core/widgets/bottom_navigator_widget.dart';
+import 'package:homework_34/core/widgets/favourite_widget.dart';
 import 'package:provider/provider.dart';
 import '../managers/most_view_top_chef_model.dart';
 
@@ -28,208 +28,154 @@ class _ChefDetailState extends State<ChefDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primary,
-      appBar: AppBar(
-        backgroundColor: AppColors.primary,
-        elevation: 0,
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: Icon(Icons.arrow_back, color: AppColors.text),
-        ),
-        actions: [
-             Container(
-            width: 28,
-            height: 28,
-            margin: const EdgeInsets.only(right: 8),
-            decoration: BoxDecoration(
-              color: AppColors.container,
-              shape: BoxShape.circle,
-            ),
-            child:IconButton(
-  padding: EdgeInsets.zero,
-  icon: Image.asset("assets/bluts.png", width: 20, height: 20),
-onPressed: () {
-  final MostModel chef = context.read<MostViewTopChefModel>().chefDetails.first;
-  showModalBottomSheet(
-    context: context,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
-    ),
-    builder: (BuildContext context) {
-      return StatefulBuilder(
-        builder: (context, setState) {
-          return Container(
-            width: 431,
-            height: 253,
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(50),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
+      appBar: CustomAppBar(
+  title: widget.username,
+  arrow: "assets/arrow.png",
+  first: "assets/bluts.png",
+  second: "assets/third.png",
+  containerColor: AppColors.container,
+  onFirstPressed: () {
+    final chef = context.read<MostViewTopChefModel>().chefDetails.first;
+    showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+      ),
+      builder: (context) {
+        return Container(
+          width: 431,
+          height: 253,
+          decoration: BoxDecoration(
+            color: AppColors.white,
+            borderRadius: BorderRadius.circular(50),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 31,
+                      backgroundImage: NetworkImage(chef.profilePhoto),
+                    ),
+                    SizedBox(width: 20),
+                    Text(widget.username,
+                        style: TextStyle(color: AppColors.text)),
+                  ],
+                ),
+                SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.only(left: 15),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Container(
-                        width: 63,
-                        height: 63,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: NetworkImage(chef.profilePhoto),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 20),
-                      Text(widget.username,
-                          style: TextStyle(color: AppColors.text)),
+                      Text("Copy Profile URL",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15)),
+                      SizedBox(height: 20),
+                      Text("Share this Profile",
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 15)),
                     ],
                   ),
-                  SizedBox(height:20),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15),
-                    child: Column(
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  },
+  onSecondPressed: () {
+    final chef = context.read<MostViewTopChefModel>().chefDetails.first;
+
+    bool muteNotifications = false;
+    bool muteAccount = false;
+    bool blockAccount = false;
+
+    showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+      ),
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (context, setState) {
+            return Container(
+              width: 431,
+              height: 373,
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(50),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
                       children: [
-                        Text("Copy Profile URL", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 15)),
-                        SizedBox(height: 20,),
-                         Text("Share this Profile", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 15)),
+                        CircleAvatar(
+                          radius: 31,
+                          backgroundImage: NetworkImage(chef.profilePhoto),
+                        ),
+                        SizedBox(width: 20),
+                        Text(widget.username,
+                            style: TextStyle(color: AppColors.text)),
                       ],
                     ),
-                  ),
-                  SizedBox(height: 5),
-                ],
+                    SizedBox(height: 20),
+                    Text("Manage notifications",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w500,
+                            fontSize: 15)),
+                    SwitchListTile(
+                      title: Text("Mute notifications", style: TextStyle(color: Colors.black),),
+                      activeColor: AppColors.text,
+                      value: muteNotifications,
+                      onChanged: (val) {
+                        setState(() => muteNotifications = val);
+                      },
+                    ),
+                    SwitchListTile(
+                      title: Text("Mute Account",style: TextStyle(color: Colors.black)),
+                      activeColor: AppColors.text,
+                      value: muteAccount,
+                      onChanged: (val) {
+                        setState(() => muteAccount = val);
+                      },
+                    ),
+                    SwitchListTile(
+                      title: Text("Block Account",style: TextStyle(color: Colors.black)),
+                      activeColor: AppColors.text,
+                      value: blockAccount,
+                      onChanged: (val) {
+                        setState(() => blockAccount = val);
+                      },
+                    ),
+                    ListTile(
+                      title: Text("Report"),
+                      onTap: () {},
+                    ),
+                  ],
+                ),
               ),
-            ),
-          );
-        },
-      );
-    },
-  );
-},
-            ),
+            );
+          },
+        );
+      },
+    );
+  },
+),
 
-
-          ),
-           Container(
-            width: 28,
-            height: 28,
-            margin: const EdgeInsets.only(right: 8),
-            decoration: BoxDecoration(
-              color: AppColors.container,
-              shape: BoxShape.circle,
-            ),
-            child:IconButton(
-  padding: EdgeInsets.zero,
-  icon: SvgPicture.asset("assets/third.svg", width: 20, height: 20),
-onPressed: () {
-  final MostModel chef = context.read<MostViewTopChefModel>().chefDetails.first;
-
-  bool muteNotifications = false;
-  bool muteAccount = false;
-  bool blockAccount = false;
-
-  showModalBottomSheet(
-    context: context,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
-    ),
-    builder: (BuildContext context) {
-      return StatefulBuilder(
-        builder: (context, setState) {
-          return Container(
-            width: 431,
-            height: 373,
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(50),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: 63,
-                        height: 63,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: NetworkImage(chef.profilePhoto),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                      SizedBox(width: 20),
-                      Text(widget.username,
-                          style: TextStyle(color: AppColors.text)),
-                    ],
-                  ),
-                  SizedBox(height:20),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15),
-                    child: Text("Manage notifications", style: TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 15)),
-                  ),
-                  SizedBox(height: 5),
-                  SwitchListTile(
-                    title: Text("Mute notifications"),
-                     activeColor: AppColors.text,
-                    value: muteNotifications,
-                    onChanged: (val) {
-                      setState(() => muteNotifications = val);
-                    },
-                  ),
-                  SwitchListTile(
-                    title: Text("Mute Account"),
-                    activeColor: AppColors.text,
-                    value: muteAccount,
-                    onChanged: (val) {
-                      setState(() => muteAccount = val);
-                    
-                    },
-                  ),
-                  SwitchListTile(
-                    title: Text("Block Account"),
-                     activeColor: AppColors.text,
-                     
-                    value: blockAccount,
-                    onChanged: (val) {
-                      setState(() => blockAccount = val);
-                    },
-                  ),
-                  ListTile(
-                    title: Text("Report"),
-                    onTap: () {
-                    },
-                  ),
-                ],
-              ),
-            ),
-          );
-        },
-      );
-    },
-  );
-},
-            ),
-
-
-          ),
-        ],
-        title: Text(
-          "${widget.username}",
-          style: TextStyle(
-            color: AppColors.text,
-            fontWeight: FontWeight.w600,
-            fontSize: 18,
-          ),
-        ),
-        centerTitle: true,
-      ),
+      
       body: Consumer<MostViewTopChefModel>(
         builder: (context, vm, child) {
           if (vm.isLoading) {
@@ -336,21 +282,80 @@ onPressed: () {
                     borderRadius: BorderRadius.circular(14),
                   ),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      _buildStatItem("${chef.recipesCount}", "recipes"),
-                      _buildDivider(),
-                      _buildStatItem("${chef.followingCount}", "Following"),
-                      _buildDivider(),
-                      _buildStatItem(
-                        _formatNumber(chef.followerCount),
-                        "Followers",
-                      ),
-                    ],
-                  ),
+  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  children: [
+    Column(
+      children: [
+        Text(
+          "${chef.recipesCount}",
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: AppColors.text, 
+          ),
+        ),
+        Text(
+          "Recipes",
+          style: TextStyle(
+            fontSize: 14,
+            color: AppColors.text, 
+          ),
+        ),
+      ],
+    ),
+    Container(
+      height: 24,
+      width: 1,
+      color: Colors.grey[300], 
+    ),
+    Column(
+      children: [
+        Text(
+          "${chef.followingCount}",
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: AppColors.text,
+          ),
+        ),
+        Text(
+          "Following",
+          style: TextStyle(
+            fontSize: 14,
+            color: AppColors.text,
+          ),
+        ),
+      ],
+    ),
+    Container(
+      height: 24,
+      width: 1,
+      color: Colors.grey[300],
+    ),
+    Column(
+      children: [
+        Text(
+          _formatNumber(chef.followerCount),
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: AppColors.text,
+          ),
+        ),
+        Text(
+          "Followers",
+          style: TextStyle(
+            fontSize: 14,
+            color: AppColors.text,
+          ),
+        ),
+      ],
+    ),
+  ],
+)
+
                 ),
                 const SizedBox(height: 30),
-
                 Container(
                   width: double.infinity,
                   child: Column(
@@ -460,14 +465,14 @@ onPressed: () {
                 children: [
                   Text(
                     recipe.title,
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Colors.black),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),
                   const SizedBox(height: 4),
                   Text(
                     recipe.description,
-                    style: TextStyle(fontSize: 12),
+                    style: TextStyle(fontSize: 12, color: Colors.black),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                   ),

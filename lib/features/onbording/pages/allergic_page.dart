@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:homework_34/core/utils/theme/colors.dart';
+import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/data/repostories/onboarding_repostory.dart';
 import 'package:provider/provider.dart';
 import 'package:homework_34/features/onbording/managers/allergic_vew_model.dart';
@@ -15,16 +16,12 @@ class Allergic extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => AllergicViewModel(repository: repository),
       builder: (context, child) => Scaffold(
-        backgroundColor: AppColors.primary,
-        appBar: AppBar(
-          backgroundColor: AppColors.primary,
-          elevation: 0,
-          leading: IconButton(
-            icon: Image.asset("assets/arrow.png", width: 30, height: 14),
-            onPressed: () => Navigator.pop(context),
-          ),
-          title: Padding(
-            padding: const EdgeInsets.only(top: 25),
+        appBar: CustomAppBar(arrow: 'assets/arrow.png',),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+            padding: const EdgeInsets.only(left: 80),
             child: Stack(
               children: [
                 Container(
@@ -32,7 +29,7 @@ class Allergic extends StatelessWidget {
                   height: 12,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
-                    color: Colors.white,
+                    color: Theme.of(context).colorScheme.inverseSurface,
                   ),
                 ),
                 Positioned(
@@ -49,11 +46,6 @@ class Allergic extends StatelessWidget {
               ],
             ),
           ),
-          centerTitle: true,
-        ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Text(

@@ -4,7 +4,7 @@ import 'package:homework_34/core/utils/theme/colors.dart';
 import 'package:homework_34/data/models/trending_repostories_models/detail_model.dart';
 import 'package:homework_34/features/trending_news/managers/all_view_model.dart';
 import 'package:provider/provider.dart';
-import 'favourite_widget.dart';
+import '../../../core/widgets/favourite_widget.dart';
 
 class AllWidget extends StatelessWidget {
   const AllWidget({super.key});

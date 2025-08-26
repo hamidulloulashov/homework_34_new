@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart';
 import 'result/result.dart';
+
 class ApiClient {
   final _dio = Dio(
     BaseOptions(
-      baseUrl: "http://192.168.0.101:8888/api/v1",
-      connectTimeout: const Duration(seconds: 10), 
+      baseUrl: "http://192.168.11.235:8888/api/v1",
+      connectTimeout: const Duration(seconds: 10),
       receiveTimeout: const Duration(seconds: 15),
       headers: {
         'Content-Type': 'application/json',
@@ -12,6 +13,7 @@ class ApiClient {
       },
     ),
   );
+
   Future<Result<T>> get<T>(
     String path, {
     Map<String, dynamic>? queryParams,
@@ -24,24 +26,7 @@ class ApiClient {
         return Result.error(Exception("Server error: ${response.statusCode}"));
       }
     } on DioException catch (dioError) {
-      String errorMessage;
-      switch (dioError.type) {
-        case DioExceptionType.connectionTimeout:
-          errorMessage = 'Server bilan bog\'lanish vaqti tugadi';
-          break;
-        case DioExceptionType.receiveTimeout:
-          errorMessage = 'Server javob berishda sekin';
-          break;
-        case DioExceptionType.connectionError:
-          errorMessage = 'Internet aloqasini tekshiring';
-          break;
-        case DioExceptionType.badResponse:
-          errorMessage = 'Server xatosi: ${dioError.response?.statusCode}';
-          break;
-        default:
-          errorMessage = 'Tarmoq xatosi: ${dioError.message}';
-      }
-      return Result.error(Exception(errorMessage));
+      return Result.error(Exception(_handleDioError(dioError)));
     } catch (e) {
       return Result.error(Exception(e.toString()));
     }
@@ -53,37 +38,32 @@ class ApiClient {
     Map<String, dynamic>? queryParams,
   }) async {
     try {
-      final response = await _dio.post(
-        path,
-        data: data,
-        queryParameters: queryParams,
-      );
+      final response =
+          await _dio.post(path, data: data, queryParameters: queryParams);
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
         return Result.ok(response.data as T);
       } else {
         return Result.error(Exception("Server error: ${response.statusCode}"));
       }
     } on DioException catch (dioError) {
-      String errorMessage;
-      switch (dioError.type) {
-        case DioExceptionType.connectionTimeout:
-          errorMessage = 'Server bilan bog\'lanish vaqti tugadi';
-          break;
-        case DioExceptionType.receiveTimeout:
-          errorMessage = 'Server javob berishda sekin';
-          break;
-        case DioExceptionType.connectionError:
-          errorMessage = 'Internet aloqasini tekshiring';
-          break;
-        case DioExceptionType.badResponse:
-          errorMessage = 'Server xatosi: ${dioError.response?.statusCode}';
-          break;
-        default:
-          errorMessage = 'Tarmoq xatosi: ${dioError.message}';
-      }
-      return Result.error(Exception(errorMessage));
+      return Result.error(Exception(_handleDioError(dioError)));
     } catch (e) {
       return Result.error(Exception(e.toString()));
+    }
+  }
+
+  String _handleDioError(DioException dioError) {
+    switch (dioError.type) {
+      case DioExceptionType.connectionTimeout:
+        return 'Server bilan bog\'lanish vaqti tugadi';
+      case DioExceptionType.receiveTimeout:
+        return 'Server javob berishda sekin';
+      case DioExceptionType.connectionError:
+        return 'Internet aloqasini tekshiring';
+      case DioExceptionType.badResponse:
+        return 'Server xatosi: ${dioError.response?.statusCode} - ${dioError.response?.statusMessage}';
+      default:
+        return 'Tarmoq xatosi: ${dioError.error ?? "noma’lum xato"}';
     }
   }
 }

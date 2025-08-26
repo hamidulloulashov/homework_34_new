@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:homework_34/core/utils/theme/colors.dart';
+import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/data/models/category_models/reviews_model.dart';
 import 'package:homework_34/features/reviews/managers/reviews_veiw_model.dart';
 import 'package:homework_34/features/reviews/pages/leave_page.dart';
-import 'package:homework_34/features/trending_news/widgets/bottom_navigator_widget.dart';
+import 'package:homework_34/core/widgets/bottom_navigator_widget.dart';
 import 'package:provider/provider.dart';
 
 class ReviewsPage extends StatelessWidget {
@@ -14,24 +15,8 @@ class ReviewsPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => ReviewsViewModel(recipeId: recipe.id),
       child: Scaffold(
-        backgroundColor: const Color(0xFF1A1A1A),
-        appBar: AppBar(
-          backgroundColor: const Color(0xFF1A1A1A),
-          elevation: 0,
-          leading: IconButton(
-            icon: Image.asset("assets/arrow.png", width: 30,height: 14,),
-            onPressed: () => Navigator.pop(context),
-          ),
-          title: const Text(
-            'Reviews',
-            style: TextStyle(
-              color: AppColors.text,
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-          centerTitle: true,
-        ),
+    
+        appBar: CustomAppBar(title: "Revise", arrow: "assets/arrow.png",),
         body: Column(
           children: [
       

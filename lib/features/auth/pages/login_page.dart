@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homework_34/core/utils/theme/colors.dart';
+import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/data/repostories/auth_respostory.dart';
 import 'package:homework_34/features/auth/managers/login_veiw_model.dart';
 import 'package:homework_34/features/auth/widgets/login_wedgte.dart';
@@ -13,7 +14,6 @@ class LoginPage extends StatelessWidget {
   final TextEditingController _loginController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<LoginViewModel>(
@@ -23,15 +23,10 @@ class LoginPage extends StatelessWidget {
       child: Consumer<LoginViewModel>(
         builder: (context, viewModel, child) {
           return Scaffold(
-            backgroundColor: AppColors.primary,
-            appBar: AppBar(
-              backgroundColor: AppColors.primary,
-              title: const Text(
-                "Login",
-                style: TextStyle(color: AppColors.text),
-              ),
-              centerTitle: true,
-            ),
+            appBar: CustomAppBar(
+              title: "Login",
+             
+               ),
             body: Padding(
               padding: const EdgeInsets.only(top: 100),
               child: Form(

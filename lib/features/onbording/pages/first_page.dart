@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:homework_34/core/utils/theme/colors.dart';
+import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/data/repostories/onboarding_repostory.dart';
 import 'package:provider/provider.dart';
 import 'package:homework_34/features/onbording/managers/frist_view_model.dart';
 import 'package:homework_34/features/onbording/pages/second_page.dart';
 import 'package:homework_34/core/client.dart';
-
 
 class FirstPage extends StatelessWidget {
   const FirstPage({super.key});
@@ -18,11 +18,14 @@ class FirstPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => FirstViewModel(repository: repository),
       builder: (context, child) => Scaffold(
-        backgroundColor: AppColors.primary,
+        appBar: CustomAppBar(
+
+         
+        ),
         body: Consumer<FirstViewModel>(
           builder: (context, vm, child) {
             if (vm.isLoading) {
-              return const Center(
+              return  Center(
                 child: CircularProgressIndicator(color: Colors.white),
               );
             }
@@ -46,9 +49,9 @@ class FirstPage extends StatelessWidget {
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          AppColors.primary.withOpacity(1),
+                          Theme.of(context).colorScheme.surface,
                           Colors.transparent,
-                          AppColors.primary.withOpacity(1),
+                           Theme.of(context).colorScheme.surface,
                         ],
                         stops: const [0.2, 0.4, 1.0],
                       ),
@@ -56,16 +59,16 @@ class FirstPage extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                  top: 60,
+              
                   left: 20,
                   right: 20,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children:  [
                       Text(
                         "Get inspired",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.inverseSurface,
                           fontWeight: FontWeight.w600,
                           fontSize: 26,
                         ),
@@ -74,7 +77,7 @@ class FirstPage extends StatelessWidget {
                       Text(
                         "Get inspired with our daily recipe recommendations.",
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.inverseSurface,
                           fontWeight: FontWeight.w400,
                           fontSize: 12,
                         ),
@@ -91,7 +94,8 @@ class FirstPage extends StatelessWidget {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (_) => const SecondPage()),
+                          MaterialPageRoute(
+                              builder: (_) => const SecondPage()),
                         );
                       },
                       child: Container(
