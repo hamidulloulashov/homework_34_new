@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:homework_34/core/widgets/bottom_navigator_widget.dart';
-import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
+import 'package:homework_34/features/common/widgets/bottom_navigator_widget.dart';
+import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
+import 'package:homework_34/features/top_chef/widgets/meal_widget.dart';
 import 'package:provider/provider.dart';
-import 'package:homework_34/core/utils/theme/colors.dart';
-import '../widgets/most_widget.dart';
+import 'package:homework_34/core/utils/app_colors.dart';
 import '../managers/most_view_top_chef_model.dart';
 
 class TopChefs extends StatefulWidget {
@@ -24,7 +24,7 @@ class _TopChefsState extends State<TopChefs> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomAppBar(title: "Top chefs", arrow: 'assets/arrow.png',first: 'assets/notifaction.png',second: 'assets/search.png',containerColor: AppColors.container,),
-      body: const MostWidget(),
+      body: const MealWidget(),
       bottomNavigationBar: BottomNavigatorNews(),
     );
   }

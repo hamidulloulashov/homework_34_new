@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:homework_34/data/models/top_chefs_models/top_chef_model.dart';
-import 'package:homework_34/data/models/top_chefs_models/most_model.dart';
-import 'package:homework_34/data/models/top_chefs_models/recipies_model.dart';
+import 'package:homework_34/data/models/profile/profile_model.dart';
+import 'package:homework_34/data/models/top_chefs/top_chef_model.dart';
+import 'package:homework_34/data/models/recipe/recipies_model.dart';
 import 'package:homework_34/data/repostories/top_chefs_repostory.dart';
 
 class MostViewTopChefModel extends ChangeNotifier {
@@ -10,7 +10,7 @@ class MostViewTopChefModel extends ChangeNotifier {
   MostViewTopChefModel({required this.repository});
 
   List<TopChefModel> chefs = [];
-  List<MostModel> chefDetails = [];
+  List<ProfileModel> chefDetails = [];
   List<RecipeModel> recipes = [];
 
   bool isLoading = false;

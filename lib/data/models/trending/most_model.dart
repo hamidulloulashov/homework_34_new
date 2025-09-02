@@ -1,0 +1,32 @@
+class MostModel {
+  final int id;
+  final int categoryId;
+  final String title;
+  final String description;
+  final String difficulty;
+  final String photo;
+  final double timeRequired;
+  final double rating;
+  MostModel({
+    required this.id,
+    required this.categoryId,
+    required this.title,
+    required this.description,
+    required this.difficulty,
+    required this.photo,
+    required this.timeRequired,
+    required this.rating,
+  });
+  factory MostModel.fromJson(Map<String, dynamic> json) {
+    return MostModel(
+      id: json['id'],
+      categoryId: json['categoryId'],
+      title: json['title'],
+      description: json['description'],
+      difficulty: json['difficulty'],
+      photo: json['photo'],
+      timeRequired: (json["timeRequired"] as num).toDouble(),
+      rating: json['rating'],
+    );
+  }
+}

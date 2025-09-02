@@ -1,6 +1,6 @@
 import 'package:homework_34/core/client.dart';
-import 'package:homework_34/core/result/result.dart';
-import 'package:homework_34/data/models/your_recipies_models/your_recipeis_model.dart';
+import 'package:homework_34/core/utils/result.dart';
+import 'package:homework_34/data/models/your_recipies/your_recipeis_model.dart';
 
 class YourRecipiesRepostory {
   final ApiClient apiClient;
@@ -14,7 +14,7 @@ class YourRecipiesRepostory {
         if (data is List) {
           final recipes = data
               .map((e) => YourRecipeisModel.fromJson(e as Map<String, dynamic>))
-              .toList();
+              .toList(); 
           return Result.ok(recipes);
         } else {
           return Result.error(Exception("Kutilmagan format"));

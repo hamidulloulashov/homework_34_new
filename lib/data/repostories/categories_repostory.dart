@@ -1,7 +1,7 @@
 import 'package:homework_34/core/client.dart';
-import 'package:homework_34/core/result/result.dart';
-import 'package:homework_34/data/models/category_models/category_model.dart';
-import 'package:homework_34/data/models/category_models/detail_model.dart';
+import 'package:homework_34/core/utils/result.dart';
+import 'package:homework_34/data/models/category/category_model.dart';
+import 'package:homework_34/data/models/recipe/recipies_model.dart';
 
 class CategoryRepository {
   final ApiClient apiClient;
@@ -27,8 +27,6 @@ class CategoryRepository {
     );
   }
 }
-
-
 class DetailsRepository {
   final ApiClient apiClient;
 

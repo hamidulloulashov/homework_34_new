@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:homework_34/data/models/trending_repostories_models/detail_model.dart';
+import 'package:homework_34/core/router/routes.dart';
+import 'package:homework_34/data/models/trending/detail_model.dart';
+import 'package:homework_34/features/add_recipeis/pages/add_resipeis_page.dart';
 import 'package:homework_34/features/auth/pages/login_page.dart';
 import 'package:homework_34/features/auth/pages/register_page.dart';
 import 'package:homework_34/features/category/pages/category_page.dart';
@@ -12,36 +14,30 @@ import 'package:homework_34/features/trending_news/pages/trending_recipes_page.d
 import 'package:homework_34/features/your_recipies/pages/your_recipeis_page.dart';
 class AppRouter {
   static final GoRouter router = GoRouter(
-    initialLocation: '/',
+    initialLocation: Routes.add_resipies,
     routes: [
       GoRoute(
-        path: '/login',
-        name: 'login',
+        path: Routes.login,
         builder: (context, state) => LoginPage(),
       ),
       GoRoute(
-        path: '/register',
-        name: 'register',
+        path: Routes.register,
         builder: (context, state) => RegisterPage(),
       ),
       GoRoute(
-        path: '/onboarding',
-        name: 'onboarding',
+        path: Routes.onboarding,
         builder: (context, state) => PagveiwPage(),
       ),
       GoRoute(
-        path: '/trending',
-        name: 'trending',
+        path: Routes.trending,
         builder: (context, state) => TrendingRecipesPage(),
       ),
       GoRoute(
-        path: '/top_chefs',
-        name: 'top_chefs',
+        path:Routes.top_chefs,
         builder: (context, state) => TopChefs(),
       ),
       GoRoute(
-        path: '/detail',
-        name: 'detail',
+        path:Routes.detail,
         builder: (context, state) {
           final recipe = state.extra as DetailModel?;
           if (recipe == null) {
@@ -53,20 +49,20 @@ class AppRouter {
         },
       ),
       GoRoute(
-        path: '/category',
-        name: 'category',
+        path: Routes.category,
         builder: (context, state) => CategoryPage(name: "all"),
       ),
       GoRoute(
-        path: '/community',
-        name: 'community',
+        path: Routes.community,
         builder: (context, state) => CommunityPage(),
       ),
          GoRoute(
-        path: '/',
-        name: 'your_resipies',
+        path: Routes.your_resipies,
         builder: (context, state) => YourRecipeisPage(),
       ),
+      GoRoute(path: Routes.add_resipies,
+      builder: (context, state) => AddResipeisPage(),
+      )
     ],
   );
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:homework_34/core/utils/theme/colors.dart';
-import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
-import 'package:homework_34/core/widgets/bottom_navigator_widget.dart';
-import 'package:homework_34/core/widgets/favourite_widget.dart';
+import 'package:homework_34/core/utils/app_colors.dart';
+import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
+import 'package:homework_34/features/common/widgets/bottom_navigator_widget.dart';
+import 'package:homework_34/features/common/widgets/favourite_widget.dart';
 import 'package:homework_34/features/your_recipies/managers/your_recipeis_veiw_model.dart';
 import 'package:provider/provider.dart';
 class YourRecipeisPage extends StatelessWidget {

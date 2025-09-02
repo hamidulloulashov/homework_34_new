@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:homework_34/data/models/onbording_models/third_model.dart';
+import 'package:homework_34/data/models/onboarding/third_model.dart';
 
 class ThirdViewModel extends ChangeNotifier {
   List<ThirdModel> third = [];

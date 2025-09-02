@@ -1,24 +1,46 @@
 import 'package:dio/dio.dart';
-import 'result/result.dart';
-
+import 'package:homework_34/core/lokal_data_storege/token_storage.dart';
+import 'utils/result.dart';
 class ApiClient {
-  final _dio = Dio(
-    BaseOptions(
-      baseUrl: "http://192.168.11.235:8888/api/v1",
-      connectTimeout: const Duration(seconds: 10),
-      receiveTimeout: const Duration(seconds: 15),
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-    ),
-  );
+  final Dio _dio;
+  ApiClient()
+      : _dio = Dio(
+          BaseOptions(
+            baseUrl: "http://192.168.0.104:8888/api/v1",
+            connectTimeout: const Duration(seconds: 10),
+            receiveTimeout: const Duration(seconds: 15),
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            },
+          ),
+        ) {
+    _dio.interceptors.add(
+      LogInterceptor(
+        request: true,
+        requestBody: true,
+        requestHeader: true,
+        responseHeader: false,
+        responseBody: true,
+        error: true,
+      ),
+    );
+  }
+
+  void setToken(String token) {
+    _dio.options.headers['Authorization'] = 'Bearer $token';
+  }
 
   Future<Result<T>> get<T>(
     String path, {
     Map<String, dynamic>? queryParams,
   }) async {
     try {
+      final token = await TokenStorage.getToken();
+      if (token != null) {
+        _dio.options.headers['Authorization'] = 'Bearer $token';
+      }
+
       final response = await _dio.get(path, queryParameters: queryParams);
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
         return Result.ok(response.data as T);
@@ -38,6 +60,11 @@ class ApiClient {
     Map<String, dynamic>? queryParams,
   }) async {
     try {
+      final token = await TokenStorage.getToken();
+      if (token != null) {
+        _dio.options.headers['Authorization'] = 'Bearer $token';
+      }
+
       final response =
           await _dio.post(path, data: data, queryParameters: queryParams);
       if (response.statusCode! >= 200 && response.statusCode! < 300) {
@@ -67,3 +94,4 @@ class ApiClient {
     }
   }
 }
+

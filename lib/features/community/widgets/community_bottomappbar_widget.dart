@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:homework_34/core/utils/theme/colors.dart';
+import 'package:homework_34/core/utils/app_colors.dart';
 class CommunityWidget extends StatefulWidget implements PreferredSizeWidget {
   const CommunityWidget({super.key});
   @override

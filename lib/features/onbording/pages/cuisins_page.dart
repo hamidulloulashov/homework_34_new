@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
+import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/data/repostories/onboarding_repostory.dart';
 import 'package:provider/provider.dart';
-import 'package:homework_34/core/utils/theme/colors.dart';
+import 'package:homework_34/core/utils/app_colors.dart';
 import 'package:homework_34/features/onbording/managers/cusins_view_model.dart';
 import 'package:homework_34/features/onbording/pages/allergic_page.dart';
 import 'package:homework_34/core/client.dart';

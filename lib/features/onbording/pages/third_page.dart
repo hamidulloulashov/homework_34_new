@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:homework_34/core/utils/theme/colors.dart';
-import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
+import 'package:homework_34/core/utils/app_colors.dart';
+import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/features/onbording/managers/third_view_model.dart';
 import 'package:homework_34/features/onbording/pages/cooking_livel_page.dart';
 import 'package:provider/provider.dart';

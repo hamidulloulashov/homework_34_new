@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:homework_34/core/result/result.dart';
-import 'package:homework_34/data/models/auth_models/register_model.dart';
+import 'package:homework_34/core/utils/result.dart';
+import 'package:homework_34/data/models/auth/register_model.dart';
 import 'package:homework_34/data/repostories/auth_respostory.dart';
 
 class RegisterViewModel extends ChangeNotifier {

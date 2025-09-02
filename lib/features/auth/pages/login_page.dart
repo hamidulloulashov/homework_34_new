@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:homework_34/core/utils/theme/colors.dart';
-import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
+import 'package:homework_34/core/utils/app_colors.dart';
+import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/data/repostories/auth_respostory.dart';
 import 'package:homework_34/features/auth/managers/login_veiw_model.dart';
 import 'package:homework_34/features/auth/widgets/login_wedgte.dart';
 import 'package:homework_34/core/client.dart';
 import 'package:provider/provider.dart';
-
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
   final TextEditingController _loginController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<LoginViewModel>(
@@ -22,11 +22,25 @@ class LoginPage extends StatelessWidget {
       ),
       child: Consumer<LoginViewModel>(
         builder: (context, viewModel, child) {
+      
+          if (viewModel.isSuccess) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              context.go('/onboarding');
+            });
+          }
+          if (viewModel.errorMessage != null) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(viewModel.errorMessage!)),
+              );
+              viewModel.clearError(); 
+            });
+          }
+
           return Scaffold(
             appBar: CustomAppBar(
               title: "Login",
-             
-               ),
+            ),
             body: Padding(
               padding: const EdgeInsets.only(top: 100),
               child: Form(
@@ -120,6 +134,7 @@ class LoginPage extends StatelessWidget {
                                   children: [
                                     Image.asset(
                                       "assets/instagram.png",
+                                     
                                       width: 26,
                                     ),
                                     const SizedBox(width: 10),

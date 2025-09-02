@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:homework_34/data/models/category_models/category_model.dart';
-import 'package:homework_34/core/result/result.dart';
-import 'package:homework_34/data/repostories/categories_repostory.dart';
+import 'package:homework_34/data/models/category/category_model.dart';
+import 'package:homework_34/core/utils/result.dart';
+import 'package:homework_34/data/repostories/categories_repostory.dart' show CategoryRepository; 
 
 class CategoryViewModel extends ChangeNotifier {
   final CategoryRepository repository;
-  CategoryViewModel({CategoryRepository? repository})
-      : repository = repository ?? CategoryRepository() {
+  
+  CategoryViewModel({required this.repository}) {
     fetchCategories();
   }
 
@@ -19,14 +19,22 @@ class CategoryViewModel extends ChangeNotifier {
     error = null;
     notifyListeners();
 
-    final Result<List<CategoryModel>> result = await repository.fetchCategories();
+    try {
+      final Result<List<CategoryModel>> result = await repository.fetchCategories();
 
-    result.fold(
-      (err) => error = err.toString(),
-      (data) => categories = data,
-    );
+      result.fold(
+        (err) => error = err.toString(),
+        (data) => categories = data,
+      );
+    } catch (e) {
+      error = e.toString();
+    }
 
     isLoading = false;
     notifyListeners();
+  }
+
+  void refresh() {
+    fetchCategories();
   }
 }

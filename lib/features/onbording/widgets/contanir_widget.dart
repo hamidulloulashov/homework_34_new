@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:homework_34/core/utils/theme/colors.dart';
+import 'package:homework_34/core/utils/app_colors.dart';
 
 class Contanir extends StatelessWidget {
   const Contanir({super.key});

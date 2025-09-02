@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
+import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/data/repostories/onboarding_repostory.dart';
+import 'package:homework_34/features/onbording/managers/start_veiw_model.dart';
 import 'package:provider/provider.dart';
-import 'package:homework_34/core/utils/theme/colors.dart';
-import 'package:homework_34/features/onbording/managers/second_view_model.dart';
+import 'package:homework_34/core/utils/app_colors.dart';
 import 'package:homework_34/features/onbording/pages/third_page.dart';
 import 'package:homework_34/core/client.dart';
 
@@ -17,10 +17,10 @@ class SecondPage extends StatelessWidget {
     final repository = OnboardingRepository(apiClient: apiClient);
 
     return ChangeNotifierProvider(
-      create: (_) => SecondViewModel(repository: repository),
+      create: (_) => StartVeiwModel(repository: repository),
       builder: (context, child) => Scaffold(
        appBar: CustomAppBar(arrow: 'assets/arrow.png',),
-        body: Consumer<SecondViewModel>(
+        body: Consumer<StartVeiwModel>(
           builder: (context, vm, child) {
             if (vm.isLoading) {
               return const Center(
@@ -39,7 +39,7 @@ class SecondPage extends StatelessWidget {
             return Stack(
               children: [
                 Positioned.fill(
-                  child: Image.network(vm.second[1].image, fit: BoxFit.cover),
+                  child: Image.network(vm.start[1].image, fit: BoxFit.cover),
                 ),
                 Positioned.fill(
                   child: Container(

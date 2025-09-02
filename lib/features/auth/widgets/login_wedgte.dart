@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:homework_34/core/utils/theme/colors.dart';
+import 'package:homework_34/core/utils/app_colors.dart';
 
 class LoginWedgtes extends StatefulWidget {
   final String hint;

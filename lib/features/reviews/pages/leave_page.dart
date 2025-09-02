@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:homework_34/core/utils/theme/colors.dart';
-import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
-import 'package:homework_34/data/models/category_models/detail_model.dart';
+import 'package:homework_34/core/utils/app_colors.dart';
+import 'package:homework_34/data/models/recipe/recipies_model.dart';
+import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/features/reviews/widgets/sucsefull_leave_widget.dart';
-import 'package:homework_34/core/widgets/bottom_navigator_widget.dart';
+import 'package:homework_34/features/common/widgets/bottom_navigator_widget.dart';
 class LeavePage extends StatefulWidget {
   final RecipeModel recipe;
   const LeavePage({super.key, required this.recipe});

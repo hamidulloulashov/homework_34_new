@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:homework_34/core/client.dart';
-import 'package:homework_34/core/result/result.dart';
-import 'package:homework_34/data/models/category_models/reviews_model.dart';
+import 'package:homework_34/core/utils/result.dart';
+import 'package:homework_34/data/models/category/reviews_model.dart';
 class ReviewsViewModel extends ChangeNotifier {
   final int recipeId;
 

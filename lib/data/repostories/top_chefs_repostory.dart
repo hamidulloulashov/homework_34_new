@@ -1,9 +1,8 @@
-import 'package:homework_34/data/models/top_chefs_models/most_model.dart';
-import 'package:homework_34/data/models/top_chefs_models/recipies_model.dart';
-import 'package:homework_34/data/models/top_chefs_models/top_chef_model.dart';
+import 'package:homework_34/data/models/profile/profile_model.dart';
+import 'package:homework_34/data/models/recipe/recipies_model.dart';
+import 'package:homework_34/data/models/top_chefs/top_chef_model.dart';
 import '../../core/client.dart';
-import '../../core/result/result.dart';
-
+import '../../core/utils/result.dart';
 class TopChefsRepostory {
   final ApiClient apiClient;
   TopChefsRepostory({required this.apiClient});
@@ -17,11 +16,11 @@ class TopChefsRepostory {
     });
   }
 
-  Future<Result<List<MostModel>>> fetchChefsId(int id) async {
+  Future<Result<List<ProfileModel>>> fetchChefsId(int id) async {
     final result = await apiClient.get("/auth/details/$id");
 
     return result.fold((error) => Result.error(error), (data) {
-      final model = MostModel.fromJson(data);
+      final model = ProfileModel.fromJson(data);
       return Result.ok([model]);
     });
   }

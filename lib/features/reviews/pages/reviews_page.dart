@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:homework_34/core/utils/theme/colors.dart';
-import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
-import 'package:homework_34/data/models/category_models/reviews_model.dart';
+import 'package:homework_34/core/utils/app_colors.dart';
+import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
+import 'package:homework_34/data/models/category/reviews_model.dart';
 import 'package:homework_34/features/reviews/managers/reviews_veiw_model.dart';
 import 'package:homework_34/features/reviews/pages/leave_page.dart';
-import 'package:homework_34/core/widgets/bottom_navigator_widget.dart';
+import 'package:homework_34/features/common/widgets/bottom_navigator_widget.dart';
 import 'package:provider/provider.dart';
 
 class ReviewsPage extends StatelessWidget {

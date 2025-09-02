@@ -2,8 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:homework_34/core/client.dart';
-import 'package:homework_34/core/utils/theme/colors.dart';
-import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
+import 'package:homework_34/core/utils/app_colors.dart';
+import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/data/repostories/auth_respostory.dart';
 import 'package:homework_34/features/auth/managers/register_veiw_model.dart';
 import 'package:homework_34/features/auth/widgets/login_wedgte.dart';

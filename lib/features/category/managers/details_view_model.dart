@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:homework_34/data/models/category_models/detail_model.dart';
-import 'package:homework_34/core/result/result.dart';
+import 'package:homework_34/core/utils/result.dart';
+import 'package:homework_34/data/models/recipe/recipies_model.dart';
 import 'package:homework_34/data/repostories/categories_repostory.dart';
 class DetailsViewModel extends ChangeNotifier {
   final DetailsRepository repository;

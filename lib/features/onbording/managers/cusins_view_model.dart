@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:homework_34/data/models/onbording_models/cusins_model.dart';
+import 'package:homework_34/data/models/onboarding/cusins_model.dart';
 import 'package:homework_34/data/repostories/onboarding_repostory.dart';
 
 class CusinsViewModel extends ChangeNotifier {

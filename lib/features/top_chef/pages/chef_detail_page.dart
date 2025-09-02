@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:homework_34/core/utils/theme/colors.dart';
-import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
-import 'package:homework_34/data/models/top_chefs_models/most_model.dart';
-import 'package:homework_34/data/models/top_chefs_models/recipies_model.dart';
-import 'package:homework_34/core/widgets/bottom_navigator_widget.dart';
-import 'package:homework_34/core/widgets/favourite_widget.dart';
+import 'package:homework_34/core/utils/app_colors.dart';
+import 'package:homework_34/data/models/profile/profile_model.dart';
+import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
+import 'package:homework_34/data/models/recipe/recipies_model.dart';
+import 'package:homework_34/features/common/widgets/bottom_navigator_widget.dart';
+import 'package:homework_34/features/common/widgets/favourite_widget.dart';
 import 'package:provider/provider.dart';
 import '../managers/most_view_top_chef_model.dart';
 
@@ -202,7 +202,7 @@ class _ChefDetailState extends State<ChefDetail> {
             );
           }
 
-          final MostModel chef = vm.chefDetails.first;
+          final ProfileModel chef = vm.chefDetails.first;
 
           return SingleChildScrollView(
             child: Column(

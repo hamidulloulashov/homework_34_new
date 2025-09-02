@@ -1,5 +1,5 @@
 import 'package:homework_34/core/client.dart';
-import 'package:homework_34/data/models/community_models/community_model.dart';
+import 'package:homework_34/data/models/community/community_model.dart';
 class CommunityRepository {
   final ApiClient _apiClient;
 

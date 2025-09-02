@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:homework_34/core/utils/theme/colors.dart';
-import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
+import 'package:homework_34/core/utils/app_colors.dart';
+import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/data/repostories/onboarding_repostory.dart';
+import 'package:homework_34/features/onbording/managers/cusins_view_model.dart';
 import 'package:provider/provider.dart';
-import 'package:homework_34/features/onbording/managers/allergic_vew_model.dart';
 import 'package:homework_34/core/client.dart';
-
 class Allergic extends StatelessWidget {
   const Allergic({super.key});
-
   @override
   Widget build(BuildContext context) {
     final apiClient = ApiClient(); 
     final repository = OnboardingRepository(apiClient: apiClient);
     return ChangeNotifierProvider(
-      create: (context) => AllergicViewModel(repository: repository),
+      create: (context) => CusinsViewModel(repository: repository),
       builder: (context, child) => Scaffold(
         appBar: CustomAppBar(arrow: 'assets/arrow.png',),
         body: Column(
@@ -70,7 +68,7 @@ class Allergic extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             Expanded(
-              child: Consumer<AllergicViewModel>(
+              child: Consumer<CusinsViewModel>(
                 builder: (context, vm, child) {
                   if (vm.isLoading) {
                     return const Center(
@@ -90,20 +88,20 @@ class Allergic extends StatelessWidget {
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
                     ),
-                    itemCount: vm.allergic.length,
+                    itemCount: vm.cusins.length,
                     itemBuilder: (context, index) => Column(
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(12),
                           child: Image.network(
-                            vm.allergic[index].image,
+                            vm.cusins[index].image,
                             width: 99,
                             height: 99,
                             fit: BoxFit.cover,
                           ),
                         ),
                         Text(
-                          vm.allergic[index].title,
+                          vm.cusins[index].title,
                           style: const TextStyle(color: Colors.white),
                         ),
                       ],

@@ -1,12 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:homework_34/core/utils/theme/colors.dart';
+import 'package:homework_34/core/utils/app_colors.dart';
 import 'package:homework_34/features/trending_news/managers/most_view_model.dart';
-import 'package:homework_34/core/widgets/favourite_widget.dart';
+import 'package:homework_34/features/common/widgets/favourite_widget.dart';
 import 'package:provider/provider.dart';
 
 class MostWidget extends StatelessWidget {
   const MostWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Consumer<MostViewModel>(
@@ -15,11 +16,29 @@ class MostWidget extends StatelessWidget {
           return const Center(child: CircularProgressIndicator());
         }
         if (vm.error != null) {
-          return Center(child: Text("Xatolik: ${vm.error}"));
+          return Center(
+            child: Column(
+              children: [
+                Text("Xatolik: ${vm.error}"),
+                ElevatedButton(
+                  onPressed: () => vm.fetchMenu(),
+                  child: const Text("Qayta urinish"),
+                ),
+              ],
+            ),
+          );
         }
         if (vm.menus.isEmpty) {
-          return const Center(child: Text("Ma'lumot topilmadi"));
+          return const Center(
+            child: Column(
+              children: [
+                Text("Ma'lumot topilmadi"),
+                Text("Trending recipes mavjud emas"),
+              ],
+            ),
+          );
         }
+
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -40,17 +59,21 @@ class MostWidget extends StatelessWidget {
                       return Stack(
                         children: [
                           Container(
-                            width: 430,
+                            width: double.infinity,
                             height: 260,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(16),
                               color: AppColors.text,
                             ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 20, top: 10),
+                            child: const Padding(
+                              padding: EdgeInsets.only(left: 20, top: 10),
                               child: Text(
                                 "Most Viewed Today",
-                                style: TextStyle(color: AppColors.white),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                           ),
@@ -62,72 +85,89 @@ class MostWidget extends StatelessWidget {
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(12),
                                 color: AppColors.white,
+                                boxShadow: const [
+                                  BoxShadow(
+                                    color: Colors.black12,
+                                    blurRadius: 5,
+                                    offset: Offset(0, 3),
+                                  ),
+                                ],
                               ),
                               child: Stack(
                                 clipBehavior: Clip.none,
                                 children: [
+                             
                                   Positioned(
                                     top: -3,
                                     left: -5,
                                     right: -5,
                                     child: ClipRRect(
-                                      borderRadius:
-                                          BorderRadiusGeometry.circular(12),
+                                      borderRadius: BorderRadius.circular(12),
                                       child: Image.network(
                                         menu.photo,
                                         height: 143,
                                         width: 340,
                                         fit: BoxFit.cover,
+                                        errorBuilder: (context, error, stackTrace) {
+                                          return Container(
+                                            height: 143,
+                                            width: 340,
+                                            color: Colors.grey[300],
+                                            child: const Icon(
+                                              Icons.image,
+                                              color: Colors.grey,
+                                            ),
+                                          );
+                                        },
                                       ),
                                     ),
                                   ),
-                                  Positioned(
+
+                              
+                                  const Positioned(
                                     top: 10,
                                     right: 10,
-                                    child: const FavouriteWidget(),
+                                    child: FavouriteWidget(),
                                   ),
+
+                         
                                   Padding(
                                     padding: const EdgeInsets.only(
                                       top: 140,
                                       left: 10,
                                     ),
                                     child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              menu.title,
-                                              style: const TextStyle(
-                                                color: Colors.black,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.bold,
-                                              ),
+                                        Text(
+                                          menu.title,
+                                          style: const TextStyle(
+                                            color: Colors.black,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 200,
+                                          child: Text(
+                                            menu.description,
+                                            style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 13,
+                                              fontWeight: FontWeight.w300,
                                             ),
-                                            SizedBox(
-                                              width: 200,
-                                              child: Text(
-                                                menu.description,
-                                                style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 13,
-                                                  fontWeight: FontWeight.w300,
-                                                ),
-                                                maxLines: 1,
-                                                overflow: TextOverflow.ellipsis,
-                                              ),
-                                            ),
-                                          ],
+                                            maxLines: 1,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
                                         ),
                                       ],
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                      left: 260,
-                                      top: 145,
-                                    ),
+
+                         
+                                  Positioned(
+                                    left: 260,
+                                    top: 145,
                                     child: Row(
                                       children: [
                                         Icon(
@@ -145,12 +185,10 @@ class MostWidget extends StatelessWidget {
                                       ],
                                     ),
                                   ),
-                                  const SizedBox(width: 15),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                      left: 300,
-                                      top: 160,
-                                    ),
+
+                                  Positioned(
+                                    left: 300,
+                                    top: 160,
                                     child: Row(
                                       children: [
                                         Text(

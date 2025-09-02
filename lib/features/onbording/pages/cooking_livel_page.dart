@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:homework_34/core/utils/theme/colors.dart';
-import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
+import 'package:homework_34/core/utils/app_colors.dart';
+import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/features/onbording/pages/cuisins_page.dart';
 import 'package:homework_34/features/onbording/widgets/contanir_widget.dart';
 

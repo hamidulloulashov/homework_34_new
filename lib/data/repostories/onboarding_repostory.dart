@@ -1,21 +1,18 @@
 import 'package:homework_34/core/client.dart';
-import 'package:homework_34/core/result/result.dart';
-import 'package:homework_34/data/models/onbording_models/allergic_model.dart';
-import 'package:homework_34/data/models/onbording_models/cusins_model.dart';
-import 'package:homework_34/data/models/onbording_models/first_page_model.dart';
-import 'package:homework_34/data/models/onbording_models/second_page_model.dart';
-
+import 'package:homework_34/core/utils/result.dart';
+import 'package:homework_34/data/models/onboarding/cusins_model.dart';
+import 'package:homework_34/data/models/onboarding/start_model.dart';
 class OnboardingRepository {
   final ApiClient apiClient;
 
   OnboardingRepository({required this.apiClient});
 
-  Future<Result<List<AllergicModel>>> getAllergic() async {
+  Future<Result<List<CusinsModel>>> getAllergic() async {
     try {
       final response = await apiClient.get('/categories/list');
 
       final data = (response.data as List)
-          .map((x) => AllergicModel.fromJson(x))
+          .map((x) => CusinsModel.fromJson(x))
           .toList();
       return Result.ok(data);
     } catch (e) {
@@ -36,12 +33,12 @@ class OnboardingRepository {
     }
   }
 
-  Future<Result<List<FirstPageModel>>> getFirstPage() async {
+  Future<Result<List<StartModel>>> getFirstPage() async {
     try {
       final response = await apiClient.get('/onboarding/list');
 
       final data = (response.data as List)
-          .map((x) => FirstPageModel.fromJson(x))
+          .map((x) => StartModel.fromJson(x))
           .toList();
       return Result.ok(data);
     } catch (e) {
@@ -49,12 +46,12 @@ class OnboardingRepository {
     }
   }
 
-  Future<Result<List<SecondPageModels>>> getSecondPage() async {
+  Future<Result<List<StartModel>>> getSecondPage() async {
     try {
       final response = await apiClient.get('/onboarding/list');
 
       final data = (response.data as List)
-          .map((x) => SecondPageModels.fromJson(x))
+          .map((x) => StartModel.fromJson(x))
           .toList();
       return Result.ok(data);
     } catch (e) {

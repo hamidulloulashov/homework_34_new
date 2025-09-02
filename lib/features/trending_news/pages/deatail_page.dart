@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:homework_34/core/utils/theme/colors.dart';
-import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
-import 'package:homework_34/data/models/trending_repostories_models/detail_model.dart';
-
+import 'package:homework_34/core/utils/app_colors.dart';
+import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
+import 'package:homework_34/data/models/trending/detail_model.dart';
 class DetailPage extends StatelessWidget {
   final DetailModel recipe;
   const DetailPage({super.key, required this.recipe});

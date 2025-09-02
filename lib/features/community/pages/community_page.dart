@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:homework_34/core/client.dart';
-import 'package:homework_34/core/utils/theme/colors.dart';
-import 'package:homework_34/core/widgets/custom_appbar_widget.dart';
+import 'package:homework_34/core/utils/app_colors.dart';
+import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/data/repostories/community_repostory.dart';
 import 'package:homework_34/features/community/managers/community_view_model.dart';
 import 'package:homework_34/features/community/widgets/community_bottomappbar_widget.dart';
-import 'package:homework_34/core/widgets/bottom_navigator_widget.dart';
-import 'package:homework_34/core/widgets/favourite_widget.dart';
+import 'package:homework_34/features/common/widgets/bottom_navigator_widget.dart';
+import 'package:homework_34/features/common/widgets/favourite_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
 
