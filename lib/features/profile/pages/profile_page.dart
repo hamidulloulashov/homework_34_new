@@ -3,6 +3,7 @@ import 'package:homework_34/core/utils/app_colors.dart';
 import 'package:homework_34/data/repostories/your_recipies_repostory.dart';
 import 'package:homework_34/features/common/widgets/bottom_navigator_widget.dart';
 import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
+import 'package:homework_34/features/floating_menu_profile/pages/settings_page.dart';
 import 'package:homework_34/features/profile/managers/favourite_veiw_model.dart';
 import 'package:homework_34/features/profile/managers/profile_view_model.dart';
 import 'package:homework_34/features/profile/widgets/recipe_detail_wigdet.dart';
@@ -38,6 +39,9 @@ class ProfilePage extends StatelessWidget {
                 first: 'assets/plus.png',
                 second: "assets/teng.png",
                 containerColor: AppColors.container,
+                onSecondPressed: () {
+                 Navigator.push(context, MaterialPageRoute(builder: (context)=> SettingsPage(),),);
+                },
               );
             },
           ),

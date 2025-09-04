@@ -9,4 +9,6 @@ class Routes {
   static const community = "/community";
   static const your_resipies = "/your_resipies";
   static const add_resipies = "/add_resipies";
+  static const settings = "/settings";
+  static const notifaction = "/notifaction";
  }

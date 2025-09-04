@@ -70,18 +70,21 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
         if (second != null)
-          Container(
-            width: 28,
-            height: 28,
-            margin: const EdgeInsets.only(right: 8),
-            decoration: BoxDecoration(
-              color: containerColor,
-              shape: BoxShape.circle,
-            ),
-            child: IconButton(
-              padding: EdgeInsets.zero,
-              icon: Image.asset(second!, width: 18, height: 18),
-              onPressed: onSecondPressed,
+          InkWell(
+            onTap: onSecondPressed,
+            child: Container(
+              width: 28,
+              height: 28,
+              margin: const EdgeInsets.only(right: 8),
+              decoration: BoxDecoration(
+                color: containerColor,
+                shape: BoxShape.circle,
+              ),
+              child: IconButton(
+                padding: EdgeInsets.zero,
+                icon: Image.asset(second!, width: 18, height: 18),
+                onPressed: onSecondPressed,
+              ),
             ),
           ),
         ...?actions,
