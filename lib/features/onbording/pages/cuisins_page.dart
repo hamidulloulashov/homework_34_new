@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/data/repostories/onboarding_repostory.dart';
+import 'package:homework_34/features/onbording/widgets/proress_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:homework_34/core/utils/app_colors.dart';
 import 'package:homework_34/features/onbording/managers/cusins_view_model.dart';
@@ -18,54 +19,29 @@ class Cuisins extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => CusinsViewModel(repository: repository),
       builder: (context, child) => Scaffold(
-        appBar: CustomAppBar(arrow: 'assets/arrow.png',),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             Padding(
-            padding: const EdgeInsets.only(top: 10, left: 80, bottom: 10),
-            child: Stack(
-              children: [
-                Container(
-                  width: 230,
-                  height: 12,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Theme.of(context).colorScheme.inverseSurface,
-                  ),
-                ),
-                Positioned(
-                  left: 85,
-                  child: Container(
-                    width: 65,
-                    height: 12,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: AppColors.text,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-           Padding(
+            const ProgressBarWidget(currentStep: 2),
+            
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Text(
                 "Select your cuisines preferences",
                 style: TextStyle(
-                 color: Theme.of(context).colorScheme.inverseSurface,
+                  color: Colors.white,
                   fontWeight: FontWeight.w600,
                   fontSize: 22,
                 ),
               ),
             ),
             const SizedBox(height: 30),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20,),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: Text(
                 "Please select your cuisines preferences for a\nbetter recommendations or you can skip it.",
                 style: TextStyle(
-                color: Theme.of(context).colorScheme.inverseSurface,
+                  color: Colors.white,
                   fontWeight: FontWeight.w400,
                 ),
               ),

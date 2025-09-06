@@ -18,14 +18,10 @@ class FirstPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => StartVeiwModel(repository: repository),
       builder: (context, child) => Scaffold(
-        appBar: CustomAppBar(
-
-         
-        ),
         body: Consumer<StartVeiwModel>(
           builder: (context, vm, child) {
             if (vm.isLoading) {
-              return  Center(
+              return const Center(
                 child: CircularProgressIndicator(color: Colors.white),
               );
             }
@@ -51,24 +47,24 @@ class FirstPage extends StatelessWidget {
                         colors: [
                           Theme.of(context).colorScheme.surface,
                           Colors.transparent,
-                           Theme.of(context).colorScheme.surface,
+                          Theme.of(context).colorScheme.surface,
                         ],
                         stops: const [0.2, 0.4, 1.0],
                       ),
                     ),
                   ),
                 ),
-                Positioned(
-              
+                const Positioned(
+                  top: 100,
                   left: 20,
                   right: 20,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children:  [
+                    children: [
                       Text(
                         "Get inspired",
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.inverseSurface,
+                          color: Colors.white,
                           fontWeight: FontWeight.w600,
                           fontSize: 26,
                         ),
@@ -77,7 +73,7 @@ class FirstPage extends StatelessWidget {
                       Text(
                         "Get inspired with our daily recipe recommendations.",
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.inverseSurface,
+                          color: Colors.white,
                           fontWeight: FontWeight.w400,
                           fontSize: 12,
                         ),

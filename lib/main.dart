@@ -23,6 +23,7 @@ class MyApp extends StatelessWidget {
       darkTheme: AppThemes.darkTheme,
       themeMode: context.watch<ThemeViewModel>().currentTheme,
       routerConfig: AppRouter.router,
+      
     );
   }
 }

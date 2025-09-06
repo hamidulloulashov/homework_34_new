@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:homework_34/core/utils/app_colors.dart';
 import 'package:homework_34/features/profile/pages/profile_page.dart';
+
 class BottomNavigatorNews extends StatefulWidget {
   const BottomNavigatorNews({super.key});
+
   @override
   State<BottomNavigatorNews> createState() => _BottomNavigatorState();
 }
+
 class _BottomNavigatorState extends State<BottomNavigatorNews> {
   int selectedIndex = 0;
 
@@ -26,6 +29,14 @@ class _BottomNavigatorState extends State<BottomNavigatorNews> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(28),
           color: AppColors.text,
+          boxShadow: [
+            BoxShadow(
+              color: Theme.of(context).colorScheme.onInverseSurface.withAlpha(200), 
+              blurRadius: 10,
+              spreadRadius: 45, 
+              offset: const Offset(0, 30),
+            ),
+          ],
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

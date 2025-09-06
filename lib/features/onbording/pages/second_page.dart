@@ -7,7 +7,6 @@ import 'package:homework_34/core/utils/app_colors.dart';
 import 'package:homework_34/features/onbording/pages/third_page.dart';
 import 'package:homework_34/core/client.dart';
 
-
 class SecondPage extends StatelessWidget {
   const SecondPage({super.key});
 
@@ -19,7 +18,6 @@ class SecondPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => StartVeiwModel(repository: repository),
       builder: (context, child) => Scaffold(
-       appBar: CustomAppBar(arrow: 'assets/arrow.png',),
         body: Consumer<StartVeiwModel>(
           builder: (context, vm, child) {
             if (vm.isLoading) {
@@ -50,24 +48,24 @@ class SecondPage extends StatelessWidget {
                         colors: [
                           Theme.of(context).colorScheme.surface,
                           Colors.transparent,
-                           Theme.of(context).colorScheme.surface,
+                          Theme.of(context).colorScheme.surface,
                         ],
                         stops: const [0.2, 0.4, 1.0],
                       ),
                     ),
                   ),
                 ),
-                Positioned(
-                  
+                const Positioned(
+                  top: 100,
                   left: 20,
                   right: 20,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children:  [
+                    children: [
                       Text(
                         "Get an increase your skills",
                         style: TextStyle(
-                           color: Theme.of(context).colorScheme.inverseSurface,
+                          color: Colors.white,
                           fontWeight: FontWeight.w600,
                           fontSize: 26,
                         ),
@@ -76,7 +74,7 @@ class SecondPage extends StatelessWidget {
                       Text(
                         "Learn essential cooking techniques at your own pace.",
                         style: TextStyle(
-                          color: Theme.of(context).colorScheme.inverseSurface,
+                          color: Colors.white,
                           fontWeight: FontWeight.w400,
                           fontSize: 12,
                         ),

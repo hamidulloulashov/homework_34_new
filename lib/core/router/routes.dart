@@ -11,4 +11,7 @@ class Routes {
   static const add_resipies = "/add_resipies";
   static const settings = "/settings";
   static const notifaction = "/notifaction";
- }
+  static const followers = "/followers";
+  static const home = "/home";
+  static const splash = "/splash";
+  }

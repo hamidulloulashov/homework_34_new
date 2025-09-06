@@ -65,44 +65,51 @@ class _DetailsPageState extends State<DetailsPage> {
             body: Column(
               children: [
                 Container(
-                  height: 60,
-                  padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    itemCount: categories.length,
-                    itemBuilder: (context, index) {
-                      final cat = categories[index];
-                      final isSelected = cat['id'] == selectedCategoryId;
+  height: 60,
+  padding: const EdgeInsets.symmetric(vertical: 8),
+  child: ListView.builder(
+    scrollDirection: Axis.horizontal,
+    padding: const EdgeInsets.symmetric(horizontal: 12),
+    itemCount: categories.length,
+    itemBuilder: (context, index) {
+      final cat = categories[index];
+      final isSelected = cat['id'] == selectedCategoryId;
 
-                      return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4),
-                        child: ChoiceChip(
-                          label: Text(
-                            cat['name'],
-                            style: TextStyle(
-                              color: isSelected ? Colors.white : AppColors.text,
-                            ),
-                          ),
-                          selected: isSelected,
-                          selectedColor: AppColors.text,
-                          backgroundColor: Theme.of(context).colorScheme.background,
-                          side: BorderSide.none,
-                          showCheckmark: false,
-                          onSelected: (_) {
-                            setState(() {
-                              selectedCategoryId = cat['id'];
-                              selectedCategoryName = cat['name'];
-                            });
-                            context.read<DetailsViewModel>().fetchRecipes(
-                                  selectedCategoryId,
-                                );
-                          },
-                        ),
-                      );
-                    },
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: GestureDetector(
+          onTap: () {
+            setState(() {
+              selectedCategoryId = cat['id'];
+              selectedCategoryName = cat['name'];
+            });
+            context.read<DetailsViewModel>().fetchRecipes(selectedCategoryId);
+          },
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+              decoration: BoxDecoration(
+                color: isSelected ? AppColors.text : Colors.transparent,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: Text(
+                  cat['name'],
+                  style: TextStyle(
+                    color: isSelected ? Colors.white : AppColors.text,
+                    fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                   ),
                 ),
+              ),
+            ),
+          ),
+        ),
+      );
+    },
+  ),
+),
+
                 Expanded(
                   child: vm.isLoading
                       ? const Center(child: CircularProgressIndicator())

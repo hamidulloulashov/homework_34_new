@@ -48,7 +48,7 @@ class OnboardingRepository {
 
   Future<Result<List<StartModel>>> getSecondPage() async {
     try {
-      final response = await apiClient.get('/onboarding/list');
+      final response = await apiClient.get('/allergic/list');
 
       final data = (response.data as List)
           .map((x) => StartModel.fromJson(x))

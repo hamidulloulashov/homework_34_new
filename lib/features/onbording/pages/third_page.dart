@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:homework_34/core/utils/app_colors.dart';
-import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/features/onbording/managers/third_view_model.dart';
 import 'package:homework_34/features/onbording/pages/cooking_livel_page.dart';
 import 'package:provider/provider.dart';
+
 class ThirdPage extends StatelessWidget {
   const ThirdPage({super.key});
   @override
@@ -11,7 +11,6 @@ class ThirdPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => ThirdViewModel(),
       builder: (context, child) => Scaffold(
-        appBar: CustomAppBar(arrow:'assets/arrow.png'),
         body: Consumer<ThirdViewModel>(
           builder: (context, vm, child) {
             if (vm.third.isEmpty) {
@@ -56,16 +55,18 @@ class ThirdPage extends StatelessWidget {
                 ),
                 Text(
                   "Find the best recipes that the world can provide you\nalso with every step that you can learn to increase\nyour cooking skills.",
-                  style: TextStyle( color: Theme.of(context).colorScheme.inverseSurface,),
+                  style: TextStyle(
+                    color: Theme.of(context).colorScheme.inverseSurface,
+                  ),
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 30),
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => CookingLivel()),
+                        MaterialPageRoute(builder: (context) => const CookingLivel()),
                       );
                     },
                     child: Container(
@@ -77,7 +78,7 @@ class ThirdPage extends StatelessWidget {
                       ),
                       child: const Center(
                         child: Text(
-                          "I’m New",
+                          "I'm New",
                           style: TextStyle(
                             color: AppColors.icons,
                             fontSize: 22,
@@ -99,7 +100,7 @@ class ThirdPage extends StatelessWidget {
                     ),
                     child: const Center(
                       child: Text(
-                        "I’ve been here ",
+                        "I've been here",
                         style: TextStyle(
                           color: AppColors.icons,
                           fontSize: 20,

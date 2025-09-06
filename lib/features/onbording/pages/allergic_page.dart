@@ -1,49 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart' show GoRouter;
 import 'package:homework_34/core/utils/app_colors.dart';
-import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/data/repostories/onboarding_repostory.dart';
 import 'package:homework_34/features/onbording/managers/cusins_view_model.dart';
+import 'package:homework_34/features/onbording/widgets/proress_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:homework_34/core/client.dart';
+
 class Allergic extends StatelessWidget {
   const Allergic({super.key});
+  
   @override
   Widget build(BuildContext context) {
     final apiClient = ApiClient(); 
     final repository = OnboardingRepository(apiClient: apiClient);
+    
     return ChangeNotifierProvider(
       create: (context) => CusinsViewModel(repository: repository),
       builder: (context, child) => Scaffold(
-        appBar: CustomAppBar(arrow: 'assets/arrow.png',),
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-            padding: const EdgeInsets.only(left: 80),
-            child: Stack(
-              children: [
-                Container(
-                  width: 230,
-                  height: 12,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: Theme.of(context).colorScheme.inverseSurface,
-                  ),
-                ),
-                Positioned(
-                  left: 165,
-                  child: Container(
-                    width: 65,
-                    height: 12,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: AppColors.text,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+            const ProgressBarWidget(currentStep: 3),
+            
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Text(
@@ -114,24 +93,29 @@ class Allergic extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Container(
-                  width: 162,
-                  height: 45,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(23),
-                    color: AppColors.text,
-                  ),
-                  child: const Center(
-                    child: Text(
-                      "Continue",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                        fontWeight: FontWeight.w600,
+                GestureDetector(
+                  onTap: () {
+                    GoRouter.of(context).go('/home');
+                  },
+                  child: Container(
+                    width: 162,
+                    height: 45,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(23),
+                      color: AppColors.text,
+                    ),
+                    child: const Center(
+                      child: Text(
+                        "Continue",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 22,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ),
-                ),
+                )
               ],
             ),
             const SizedBox(height: 30),

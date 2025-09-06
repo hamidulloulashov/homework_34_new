@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:homework_34/core/utils/app_colors.dart';
-
 import '../managers/theme_view_model.dart';
+
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final String? title; 
+  final String? title;
   final List<Widget>? actions;
   final String? arrow;
   final String? first;
@@ -12,10 +12,12 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final Color? containerColor;
   final VoidCallback? onFirstPressed;
   final VoidCallback? onSecondPressed;
+  final PreferredSizeWidget? bottom; 
+  final Widget? customWidget; 
 
   const CustomAppBar({
     super.key,
-    this.title, 
+    this.title,
     this.actions,
     this.arrow,
     this.first,
@@ -23,6 +25,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.containerColor,
     this.onFirstPressed,
     this.onSecondPressed,
+    this.bottom, 
+    this.customWidget, 
   });
 
   @override
@@ -30,6 +34,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     final isDark = context.select<ThemeViewModel, bool>((vm) => vm.isDark);
     return AppBar(
       elevation: 0,
+      bottom: bottom, 
       leading: arrow != null
           ? GestureDetector(
               onTap: () {
@@ -41,7 +46,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               ),
             )
           : null,
-      title: title != null 
+      title: title != null
           ? Center(
               child: Text(
                 title!,
@@ -54,6 +59,11 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             )
           : null,
       actions: [
+        if (customWidget != null)
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: customWidget!,
+          ),
         if (first != null)
           Container(
             width: 28,
@@ -97,5 +107,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize =>
+      Size.fromHeight(kToolbarHeight + (bottom?.preferredSize.height ?? 0)); 
 }

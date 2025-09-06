@@ -3,10 +3,8 @@ import 'package:homework_34/core/utils/app_colors.dart';
 import 'package:homework_34/features/common/widgets/bottom_navigator_widget.dart';
 import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/features/floating_menu_profile/pages/notifaction_pages.dart';
-
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
