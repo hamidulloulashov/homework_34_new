@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:homework_34/core/router/routes.dart';
 import 'package:homework_34/core/utils/app_colors.dart';
 import 'package:homework_34/data/repostories/your_recipies_repostory.dart';
 import 'package:homework_34/features/common/widgets/bottom_navigator_widget.dart';
 import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
-import 'package:homework_34/features/floating_menu_profile/pages/settings_page.dart';
 import 'package:homework_34/features/profile/managers/favourite_veiw_model.dart';
 import 'package:homework_34/features/profile/managers/profile_view_model.dart';
+import 'package:homework_34/features/profile/widgets/profile_widget.dart';
 import 'package:homework_34/features/profile/widgets/recipe_detail_wigdet.dart';
 import 'package:provider/provider.dart';
 import 'package:homework_34/data/repostories/profile_repostory.dart';
 import 'package:homework_34/core/client.dart';
+
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -21,14 +25,14 @@ class ProfilePage extends StatelessWidget {
             profileRepostory: ProfileRepostory(apiClient: ApiClient()),
           )..fetchProfile(),
         ),
-       ChangeNotifierProvider(
-  create: (_) => FavouriteVeiwModel(
-    repository: context.read<YourRecipiesRepostory>(),
-  ),
-),
+        ChangeNotifierProvider(
+          create: (_) => FavouriteVeiwModel(
+            repository: context.read<YourRecipiesRepostory>(),
+          ),
+        ),
       ],
       child: Scaffold(
-        bottomNavigationBar: BottomNavigatorNews(),
+        bottomNavigationBar: const BottomNavigatorNews(),
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(kToolbarHeight),
           child: Consumer<ProfileViewModel>(
@@ -37,10 +41,13 @@ class ProfilePage extends StatelessWidget {
                 title: vm.profile?.username ?? "Profile",
                 arrow: 'assets/arrow.png',
                 first: 'assets/plus.png',
+                onFirstPressed: (){
+                  context.push(Routes.add_resipies);
+                },
                 second: "assets/teng.png",
                 containerColor: AppColors.container,
                 onSecondPressed: () {
-                 Navigator.push(context, MaterialPageRoute(builder: (context)=> SettingsPage(),),);
+                  context.push(Routes.settings);
                 },
               );
             },
@@ -48,12 +55,18 @@ class ProfilePage extends StatelessWidget {
         ),
         body: Consumer<ProfileViewModel>(
           builder: (context, vm, child) {
-            if (vm.isLoading) return const Center(child: CircularProgressIndicator());
-            if (vm.error != null) return Center(child: Text("Xato: ${vm.error}"));
-            if (vm.profile == null) return const Center(child: Text("Profile topilmadi"));
-            
+            if (vm.isLoading) {
+              return const Center(child: CircularProgressIndicator());
+            }
+            if (vm.error != null) {
+              return Center(child: Text("Xato: ${vm.error}"));
+            }
+            if (vm.profile == null) {
+              return const Center(child: Text("Profile topilmadi"));
+            }
+
             final profile = vm.profile!;
-            
+
             return CustomScrollView(
               slivers: [
                 SliverPersistentHeader(
@@ -66,6 +79,7 @@ class ProfilePage extends StatelessWidget {
                       padding: const EdgeInsets.all(16),
                       child: Column(
                         children: [
+                       ProfileWidget(),
                           Container(
                             width: 356,
                             height: 50,
@@ -88,30 +102,36 @@ class ProfilePage extends StatelessWidget {
                                   height: 26,
                                   color: AppColors.container,
                                 ),
-                                Text(
-                                  '       ${profile.followerCount}\n Follower',
-                                  style: TextStyle(color: AppColors.text),
+                                GestureDetector(
+                                  onTap: () => GoRouter.of(context).push("/followers"),
+                                  child: Text(
+                                    '       ${profile.followerCount}\n Following',
+                                    style: TextStyle(color: AppColors.text),
+                                  ),
                                 ),
-                                Container(
-                                  width: 2,
-                                  height: 26,
-                                  color: AppColors.container,
+                                GestureDetector(
+                                      onTap: () => GoRouter.of(context).push("/followers"),
+                                  child: Container(
+                                    width: 2,
+                                    height: 26,
+                                    color: AppColors.container,
+                                  ),
                                 ),
                                 Text(
-                                  '         ${profile.followingCount}\n Following ',
+                                  '         ${profile.followingCount}\n Followers ',
                                   style: TextStyle(color: AppColors.text),
                                 ),
                               ],
                             ),
                           ),
-                          const SizedBox(height: 20),
-                        
-                          const RecipeDetailWidget(),
+                     
+                          SizedBox(height: 20,),
+                           Text("Recipe", style: TextStyle(color: AppColors.text,fontWeight: FontWeight.w600, fontSize: 25)),
+                          const RecipeDetailWidget()
                         ],
                       ),
                     ),
-                  ],
-                  ),
+                  ]),
                 ),
               ],
             );
@@ -121,6 +141,7 @@ class ProfilePage extends StatelessWidget {
     );
   }
 }
+
 class ProfileHeaderDelegate extends SliverPersistentHeaderDelegate {
   final dynamic profile;
 
@@ -163,7 +184,6 @@ class ProfileHeaderDelegate extends SliverPersistentHeaderDelegate {
                   : const Icon(Icons.person, size: 50),
             ),
           ),
-
           const SizedBox(width: 16),
           Expanded(
             child: Column(

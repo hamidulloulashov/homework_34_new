@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:homework_34/core/router/routes.dart';
 import 'package:homework_34/core/utils/app_colors.dart';
 import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/data/models/category/reviews_model.dart';
@@ -6,26 +8,26 @@ import 'package:homework_34/features/reviews/managers/reviews_veiw_model.dart';
 import 'package:homework_34/features/reviews/pages/leave_page.dart';
 import 'package:homework_34/features/common/widgets/bottom_navigator_widget.dart';
 import 'package:provider/provider.dart';
+import 'package:homework_34/data/models/recipe/recipies_model.dart';
 
 class ReviewsPage extends StatelessWidget {
-  final dynamic recipe; 
+  final RecipeModel recipe; // ✅ tipni dynamicdan RecipeModel ga o'zgartirdik
   const ReviewsPage({super.key, required this.recipe});
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => ReviewsViewModel(recipeId: recipe.id),
       child: Scaffold(
-    
-        appBar: CustomAppBar(title: "Revise", arrow: "assets/arrow.png",),
+        appBar: CustomAppBar(title: "Revise", arrow: "assets/arrow.png"),
         body: Column(
           children: [
-      
             Container(
               width: 430,
               height: 200,
               margin: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-               color: AppColors.text,
+                color: AppColors.text,
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Padding(
@@ -54,7 +56,6 @@ class ReviewsPage extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(width: 16),
-                  
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.only(top: 15, bottom: 5, left: 10),
@@ -70,8 +71,6 @@ class ReviewsPage extends StatelessWidget {
                               ),
                             ),
                             const SizedBox(height: 4),
-                            
-                          
                             Consumer<ReviewsViewModel>(
                               builder: (context, viewModel, child) {
                                 return Row(
@@ -88,9 +87,9 @@ class ReviewsPage extends StatelessWidget {
                                     ),
                                     const SizedBox(width: 8),
                                     Text(
-                                      viewModel.isLoading 
-                                        ? "Loading..."
-                                        : "(${viewModel.reviews.length} Reviews)",
+                                      viewModel.isLoading
+                                          ? "Loading..."
+                                          : "(${viewModel.reviews.length} Reviews)",
                                       style: const TextStyle(
                                         color: Colors.white70,
                                         fontSize: 12,
@@ -101,7 +100,6 @@ class ReviewsPage extends StatelessWidget {
                               },
                             ),
                             const SizedBox(height: 4),
-                          
                             Row(
                               children: [
                                 const CircleAvatar(
@@ -119,37 +117,34 @@ class ReviewsPage extends StatelessWidget {
                                   ),
                                 ),
                                 const Spacer(),
-                                
                               ],
                             ),
-                            SizedBox(height: 4,),
-                            GestureDetector(
-                              onTap: () {
-                               Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (_) => LeavePage(recipe: recipe,), 
-      ),);
-                              },
-                              child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 12,
-                                      vertical: 6,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
-                                    child: const Text(
-                                      'Add Review',
-                                      style: TextStyle(
-                                        color: Color(0xFFFF6B6B),
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ),
-                            ),
+                            const SizedBox(height: 4),
+                           InkWell(
+  onTap: () {
+    context.push(Routes.leave, extra: recipe);
+  },
+  borderRadius: BorderRadius.circular(20),
+  child: Container(
+    padding: const EdgeInsets.symmetric(
+      horizontal: 12,
+      vertical: 6,
+    ),
+    decoration: BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(20),
+    ),
+    child: const Text(
+      'Add Review',
+      style: TextStyle(
+        color: Color(0xFFFF6B6B),
+        fontSize: 12,
+        fontWeight: FontWeight.w600,
+      ),
+    ),
+  ),
+)
+
                           ],
                         ),
                       ),
@@ -158,7 +153,6 @@ class ReviewsPage extends StatelessWidget {
                 ),
               ),
             ),
-            
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Align(
@@ -174,8 +168,6 @@ class ReviewsPage extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            
-      
             Expanded(
               child: Consumer<ReviewsViewModel>(
                 builder: (context, viewModel, child) {
@@ -186,7 +178,6 @@ class ReviewsPage extends StatelessWidget {
                       ),
                     );
                   }
-
                   if (viewModel.error != null) {
                     return Center(
                       child: Column(
@@ -217,7 +208,6 @@ class ReviewsPage extends StatelessWidget {
                       ),
                     );
                   }
-
                   if (viewModel.reviews.isEmpty) {
                     return const Center(
                       child: Column(
@@ -240,7 +230,6 @@ class ReviewsPage extends StatelessWidget {
                       ),
                     );
                   }
-
                   return ListView.builder(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     itemCount: viewModel.reviews.length,
@@ -251,7 +240,6 @@ class ReviewsPage extends StatelessWidget {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                          
                             CircleAvatar(
                               radius: 20,
                               backgroundImage: review.user.profilePhoto.isNotEmpty
@@ -261,8 +249,6 @@ class ReviewsPage extends StatelessWidget {
                                     ),
                             ),
                             const SizedBox(width: 12),
-                            
-                       
                             Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -281,11 +267,10 @@ class ReviewsPage extends StatelessWidget {
                                     ],
                                   ),
                                   const SizedBox(height: 4),
-                                  
                                   Text(
-                                    review.title.isNotEmpty 
-                                      ? review.title 
-                                      : "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                                    review.title.isNotEmpty
+                                        ? review.title
+                                        : "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
                                     style: const TextStyle(
                                       color: Colors.white70,
                                       fontSize: 13,
@@ -293,8 +278,6 @@ class ReviewsPage extends StatelessWidget {
                                     ),
                                   ),
                                   const SizedBox(height: 8),
-                                  
-                              
                                   Row(
                                     children: List.generate(5, (starIndex) {
                                       return Icon(
@@ -319,13 +302,10 @@ class ReviewsPage extends StatelessWidget {
             ),
           ],
         ),
-        
-   
         bottomNavigationBar: BottomNavigatorNews(),
       ),
     );
   }
-
 
   String _getUserDisplayName(UserModel user) {
     final fullName = "${user.firstName} ${user.lastName}".trim();
@@ -337,6 +317,4 @@ class ReviewsPage extends StatelessWidget {
     }
     return "Anonymous User";
   }
-
-
 }

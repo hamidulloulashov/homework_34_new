@@ -9,7 +9,6 @@ import 'package:homework_34/features/common/widgets/bottom_navigator_widget.dart
 import 'package:homework_34/features/common/widgets/favourite_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:shimmer/shimmer.dart';
-
 class CommunityPage extends StatefulWidget {
   const CommunityPage({super.key});
 
@@ -42,6 +41,7 @@ class _CommunityPageState extends State<CommunityPage> {
         builder: (context, vm, child) {
           if (vm.isLoading) {
             return Scaffold(
+              extendBody: true,
               body: SingleChildScrollView(
                 child: Padding(
                   padding: const EdgeInsets.all(16),
@@ -85,7 +85,8 @@ class _CommunityPageState extends State<CommunityPage> {
           }
 
           return Scaffold(
-            appBar: CustomAppBar(title: "Comunity", arrow: "assets/arrow.png",first: "assets/notifaction.png",second: "assets/search.png",containerColor: AppColors.container,),
+            extendBody: true,
+            appBar: CustomAppBar(title: "Comunity", arrow: "assets/arrow.png",first: "first",second: "search",containerColor: AppColors.container,),
             bottomNavigationBar: const BottomNavigatorNews(),
             body: SingleChildScrollView(
               child: Padding(

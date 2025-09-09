@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:homework_34/core/router/routes.dart';
 import 'package:homework_34/core/utils/app_colors.dart';
-import 'package:homework_34/features/top_chef/pages/chef_detail_page.dart';
 import 'package:provider/provider.dart';
+import 'package:go_router/go_router.dart'; 
+
 import '../managers/most_view_top_chef_model.dart';
 
 class MealWidget extends StatelessWidget {
@@ -9,7 +11,8 @@ class MealWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<MostViewTopChefModel>(
-      builder: (context, vm, child) {        if (vm.isLoading) {
+      builder: (context, vm, child) {
+        if (vm.isLoading) {
           return const Center(child: CircularProgressIndicator());
         }
         if (vm.errorMessage != null) {
@@ -41,15 +44,18 @@ class MealWidget extends StatelessWidget {
           itemBuilder: (context, index) {
             final chef = vm.chefs[index];
             return GestureDetector(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => ChefDetail(
-                    id: chef.id,
-                    username: '@${chef.firstName.toLowerCase()}-chef',
-                  ),
-                ),
-              ),
+              onTap: () {
+        
+                context.push(
+  Routes.chef_detail,
+  extra: {
+    'id': chef.id,
+    'username': '@${chef.firstName.toLowerCase()}-chef',
+  },
+);
+
+
+              },
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
@@ -71,7 +77,7 @@ class MealWidget extends StatelessWidget {
                       child: Container(
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.vertical(
+                          borderRadius: const BorderRadius.vertical(
                             bottom: Radius.circular(16),
                           ),
                           boxShadow: [

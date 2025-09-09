@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:homework_34/core/utils/app_colors.dart';
 import 'package:homework_34/features/common/widgets/bottom_navigator_widget.dart';
 import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
-import 'package:homework_34/features/reviews/pages/reviews_page.dart';
 class RecipeDetailsPage extends StatelessWidget {
   final dynamic recipe;
   const RecipeDetailsPage({super.key, required this.recipe});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       appBar: CustomAppBar(
         title: recipe.title?? "Recipe",
         arrow: "assets/arrow.png",
@@ -21,100 +22,103 @@ class RecipeDetailsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Stack(
-              children: [
-                Container(
-                  width: 356,
-                  height: 337,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: AppColors.text,
+            Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Stack(
+                children: [
+                  Container(
+                    width: 356,
+                    height: 337,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      color: AppColors.text,
+                    ),
                   ),
-                ),
-                Image.network(
-                  recipe.photo,
-                  height: 281,
-                  width: 356,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    return Container(
-                      height: 300,
-                      color: Colors.grey[800],
-                      child: const Icon(
-                        Icons.image,
-                        color: Colors.white,
-                        size: 50,
-                      ),
-                    );
-                  },
-                ),
-                const Positioned.fill(
-                  child: Center(
-                    child: CircleAvatar(
-                      radius: 30,
-                      backgroundColor: AppColors.text,
-                      child: Icon(
-                        Icons.play_arrow,
-                        color: Colors.white,
-                        size: 40,
+                  ClipRRect(
+                    borderRadius: BorderRadiusGeometry.circular(12),
+                    child: Image.network(
+                      recipe.photo,
+                      height: 281,
+                      width: 356,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                       return Container(
+              
+                       );
+                      },
+                    ),
+                  ),
+                  const Positioned.fill(
+                    child: Center(
+                      child: CircleAvatar(
+                        radius: 30,
+                        backgroundColor: AppColors.text,
+                        child: Icon(
+                          Icons.play_arrow,
+                          color: Colors.white,
+                          size: 40,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                 Padding(
+                   padding: const EdgeInsets.only(top: 290, left: 10,  right: 50),
+                   child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Expanded(
+                            child: Text(
+                              recipe.title ?? 'Recipe Title',
+                              style: TextStyle(
+                                color: Theme.of(context).colorScheme.inverseSurface,
+                                fontSize: 24,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                               
+                          GestureDetector(
+                                                                  onTap: () {
+                         context.push(
+                         '/reviews',
+                           extra: recipe,
+                                      );
+                                },
+                     
+                            child: Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                              decoration: BoxDecoration(
+                                color: Colors.orange,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  const Icon(Icons.star, color: Colors.white, size: 16),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    (recipe.rating ?? 4.5).toString(),
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                 ),
+                ],
+              ),
             ),
             Padding(
               padding: const EdgeInsets.all(20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          recipe.title ?? 'Recipe Title',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-            
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => ReviewsPage(recipe: recipe),
-                            ),
-                          );
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                          decoration: BoxDecoration(
-                            color: Colors.orange,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              const Icon(Icons.star, color: Colors.white, size: 16),
-                              const SizedBox(width: 4),
-                              Text(
-                                (recipe.rating ?? 4.5).toString(),
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  
             
                   const SizedBox(height: 16),
                   Row(
@@ -126,13 +130,13 @@ class RecipeDetailsPage extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(width: 12),
-                      const Column(
+                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             'Chef John',
                             style: TextStyle(
-                              color: Colors.white,
+                              color: Theme.of(context).colorScheme.inverseSurface,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
@@ -242,10 +246,7 @@ class RecipeDetailsPage extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(55),
-        child: BottomNavigatorNews(),
-      ),
+      bottomNavigationBar: BottomNavigatorNews(),
     );
   }
 }

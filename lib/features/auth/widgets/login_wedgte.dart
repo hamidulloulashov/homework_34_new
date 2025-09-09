@@ -27,7 +27,7 @@ class _RecipiTextFormState extends State<LoginWedgtes> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(widget.text, style: TextStyle(color: Colors.white)),
+        Text(widget.text, style: TextStyle(color: Theme.of(context).colorScheme.inverseSurface,)),
         SizedBox(height: 8),
         SizedBox(
           width: 357,

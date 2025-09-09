@@ -23,7 +23,8 @@ class _TopChefsState extends State<TopChefs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "Top chefs", arrow: 'assets/arrow.png',first: 'assets/notifaction.png',second: 'assets/search.png',containerColor: AppColors.container,),
+      extendBody: true,
+      appBar: CustomAppBar(title: "Top chefs", arrow: 'assets/arrow.png',first: 'first',second: 'search',containerColor: AppColors.container,),
       body: const MealWidget(),
       bottomNavigationBar: BottomNavigatorNews(),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:homework_34/core/utils/app_colors.dart';
 
-class ProgressBarWidget extends StatelessWidget {
+class ProgressBarWidget extends StatelessWidget implements PreferredSizeWidget {
   final int currentStep; 
   
   const ProgressBarWidget({
@@ -10,13 +10,16 @@ class ProgressBarWidget extends StatelessWidget {
   });
 
   @override
+  Size get preferredSize => const Size.fromHeight(32.0);
+
+  @override
   Widget build(BuildContext context) {
     double getLeftPosition() {
       switch (currentStep) {
         case 1:
           return 0; 
         case 2:
-          return 82.5;
+          return 82.5; 
         case 3:
           return 165; 
         default:
@@ -25,10 +28,10 @@ class ProgressBarWidget extends StatelessWidget {
     }
 
     return Padding(
-      padding: const EdgeInsets.only(left: 80, top: 10, bottom: 10),
+      padding: const EdgeInsets.only( top: 10, bottom: 10),
       child: Stack(
         children: [
-     
+    
           Container(
             width: 230,
             height: 12,
@@ -37,7 +40,7 @@ class ProgressBarWidget extends StatelessWidget {
               color: Theme.of(context).colorScheme.inverseSurface,
             ),
           ),
-  
+
           Positioned(
             left: getLeftPosition(),
             child: Container(

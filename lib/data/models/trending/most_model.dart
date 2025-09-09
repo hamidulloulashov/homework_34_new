@@ -26,7 +26,7 @@ class MostModel {
       difficulty: json['difficulty'],
       photo: json['photo'],
       timeRequired: (json["timeRequired"] as num).toDouble(),
-      rating: json['rating'],
+      rating: (json['rating'] as num).toDouble(),
     );
   }
 }

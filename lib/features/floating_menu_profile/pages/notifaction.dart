@@ -3,14 +3,14 @@ import 'package:homework_34/core/utils/app_colors.dart';
 import 'package:homework_34/features/common/widgets/bottom_navigator_widget.dart';
 import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
 
-class NotifactionPages extends StatefulWidget {
-  const NotifactionPages({super.key});
+class Notifaction extends StatefulWidget {
+  const Notifaction({super.key});
 
   @override
-  State<NotifactionPages> createState() => _NotifactionPagesState();
+  State<Notifaction> createState() => _NotifactionState();
 }
 
-class _NotifactionPagesState extends State<NotifactionPages> {
+class _NotifactionState extends State<Notifaction> {
   bool muteNotifications = false; 
   bool sound = false;
   bool call = false;
@@ -56,9 +56,8 @@ class _NotifactionPagesState extends State<NotifactionPages> {
       ],
     ),
   ),
-)
-,
-                
+),
+               
               ],
             ),
                  Row(

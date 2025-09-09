@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/data/repostories/onboarding_repostory.dart';
-import 'package:homework_34/features/onbording/widgets/proress_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:homework_34/core/utils/app_colors.dart';
 import 'package:homework_34/features/onbording/managers/cusins_view_model.dart';
-import 'package:homework_34/features/onbording/pages/allergic_page.dart';
 import 'package:homework_34/core/client.dart';
 
 class Cuisins extends StatelessWidget {
@@ -22,26 +19,26 @@ class Cuisins extends StatelessWidget {
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const ProgressBarWidget(currentStep: 2),
             
-            const Padding(
+            
+             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Text(
                 "Select your cuisines preferences",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.inverseSurface,
                   fontWeight: FontWeight.w600,
                   fontSize: 22,
                 ),
               ),
             ),
             const SizedBox(height: 30),
-            const Padding(
+           Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Text(
                 "Please select your cuisines preferences for a\nbetter recommendations or you can skip it.",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.inverseSurface,
                   fontWeight: FontWeight.w400,
                 ),
               ),
@@ -81,10 +78,10 @@ class Cuisins extends StatelessWidget {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        const SizedBox(height: 5),
+                         SizedBox(height: 5),
                         Text(
                           vm.cusins[index].title,
-                          style: const TextStyle(color: Colors.white),
+                          style:  TextStyle(color: Theme.of(context).colorScheme.inverseSurface),
                         ),
                       ],
                     ),
@@ -115,28 +112,20 @@ class Cuisins extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(width: 20),
-                GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => const Allergic()),
-                    );
-                  },
-                  child: Container(
-                    width: 162,
-                    height: 45,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(23),
-                      color: AppColors.text,
-                    ),
-                    child: const Center(
-                      child: Text(
-                        "Continue",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.w600,
-                        ),
+                Container(
+                  width: 162,
+                  height: 45,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(23),
+                    color: AppColors.text,
+                  ),
+                  child: const Center(
+                    child: Text(
+                      "Continue",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 22,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
                   ),

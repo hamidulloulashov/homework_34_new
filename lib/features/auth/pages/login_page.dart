@@ -9,7 +9,6 @@ import 'package:homework_34/core/client.dart';
 import 'package:provider/provider.dart';
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
-
   final TextEditingController _loginController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
@@ -70,6 +69,7 @@ class LoginPage extends StatelessWidget {
                             children: [
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(23)),
                                   backgroundColor: AppColors.container,
                                   fixedSize: const Size(207, 45),
                                 ),
@@ -99,6 +99,7 @@ class LoginPage extends StatelessWidget {
                               const SizedBox(height: 16),
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(23)),
                                   backgroundColor: AppColors.container,
                                   fixedSize: const Size(207, 45),
                                 ),
@@ -115,15 +116,18 @@ class LoginPage extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 50),
-                              const Text(
-                                "Forgot Password?",
-                                style: TextStyle(color: Colors.white),
-                              ),
+                               GestureDetector(
+                                onTap:() => GoRouter.of(context).push("/got_mail"),
+                                 child: Text(
+                                  "Forgot Password?",
+                                  style: TextStyle(color: Theme.of(context).colorScheme.inverseSurface,),
+                                                               ),
+                               ),
                               const SizedBox(height: 50),
-                              const Text(
+                               Text(
                                 "or sign up with",
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: Theme.of(context).colorScheme.inverseSurface,
                                   fontSize: 13,
                                 ),
                               ),
@@ -134,26 +138,27 @@ class LoginPage extends StatelessWidget {
                                   children: [
                                     Image.asset(
                                       "assets/instagram.png",
-                                     
+                                     color: Theme.of(context).colorScheme.inverseSurface,
                                       width: 26,
                                     ),
                                     const SizedBox(width: 10),
-                                    Image.asset("assets/google.png", width: 26),
+                                    Image.asset("assets/google.png", width: 26,color: Theme.of(context).colorScheme.inverseSurface,),
                                     const SizedBox(width: 10),
                                     Image.asset(
                                       "assets/facbook.png",
+                                      color: Theme.of(context).colorScheme.inverseSurface,
                                       width: 26,
                                     ),
                                     const SizedBox(width: 10),
-                                    Image.asset("assets/watsap.png", width: 26),
+                                    Image.asset("assets/watsap.png", width: 26,color: Theme.of(context).colorScheme.inverseSurface,),
                                   ],
                                 ),
                               ),
                               const SizedBox(height: 30),
-                              const Text(
+                               Text(
                                 "Dont have an account? Sign Up",
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: Theme.of(context).colorScheme.inverseSurface,
                                   fontSize: 12,
                                 ),
                               ),

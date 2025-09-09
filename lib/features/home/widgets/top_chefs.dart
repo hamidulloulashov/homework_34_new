@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:homework_34/core/client.dart';
 import 'package:homework_34/core/utils/app_colors.dart';
 import 'package:homework_34/data/repostories/home_repostory.dart';
@@ -56,36 +57,39 @@ class ChefWidget extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: chef.photo != null
-                                ? Image.network(
-                                    chef.photo!,
-                                    width: 83,
-                                    height: 74,
-                                    fit: BoxFit.cover,
-                                    errorBuilder: (context, error, stackTrace) {
-                                      return const Icon(Icons.error);
-                                    },
-                                  )
-                                : Container(
-                                    width: 83,
-                                    height: 74,
-                                    color: Colors.grey.shade300,
-                                    child: const Icon(
-                                      Icons.person,
-                                      size: 50,
-                                      color: Colors.grey,
+                          GestureDetector(
+                            onTap: () => GoRouter.of(context).push("/top_chefs"),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: chef.photo != null
+                                  ? Image.network(
+                                      chef.photo!,
+                                      width: 83,
+                                      height: 74,
+                                      fit: BoxFit.cover,
+                                      errorBuilder: (context, error, stackTrace) {
+                                        return const Icon(Icons.error);
+                                      },
+                                    )
+                                  : Container(
+                                      width: 83,
+                                      height: 74,
+                                      color: Colors.grey.shade300,
+                                      child: const Icon(
+                                        Icons.person,
+                                        size: 50,
+                                        color: Colors.grey,
+                                      ),
                                     ),
-                                  ),
+                            ),
                           ),
                           const SizedBox(height: 8),
                           Text(
                             chef.firstName,
-                            style: const TextStyle(
+                            style:  TextStyle(
                               fontWeight: FontWeight.bold,
                               fontSize: 14,
-                              color: AppColors.white,
+                              color: Theme.of(context).colorScheme.inverseSurface,
                             ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,

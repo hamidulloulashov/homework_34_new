@@ -4,7 +4,6 @@ import 'package:homework_34/features/following/widgets/following_widget.dart';
 import '../../../core/utils/app_colors.dart';
 import '../../common/widgets/bottom_navigator_widget.dart';
 import '../../common/widgets/custom_appbar_widget.dart';
-
 class FollowingAndFollowersPage extends StatelessWidget {
   const FollowingAndFollowersPage({super.key});
 

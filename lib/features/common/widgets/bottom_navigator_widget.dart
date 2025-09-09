@@ -1,26 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:homework_34/core/utils/app_colors.dart';
-import 'package:homework_34/features/profile/pages/profile_page.dart';
 
-class BottomNavigatorNews extends StatefulWidget {
+class BottomNavigatorNews extends StatelessWidget {
   const BottomNavigatorNews({super.key});
 
-  @override
-  State<BottomNavigatorNews> createState() => _BottomNavigatorState();
-}
-
-class _BottomNavigatorState extends State<BottomNavigatorNews> {
-  int selectedIndex = 0;
-
-  final List<String> icons = [
+  final List<String> icons = const [
     "assets/home.png",
     "assets/message.png",
     "assets/box.png",
     "assets/profile.png",
   ];
 
+  int _getSelectedIndex(String location) {
+    if (location.startsWith('/home')) return 0;
+    if (location.startsWith('/community')) return 1;
+    if (location.startsWith('/category')) return 2;
+    if (location.startsWith('/profile')) return 3;
+    return 0;
+  }
+
+  void _onItemTapped(BuildContext context, int index) {
+    switch (index) {
+      case 0:
+        context.push('/home');
+        break;
+      case 1:
+        context.push('/community');
+        break;
+      case 2:
+        context.push('/category');
+        break;
+      case 3:
+        context.push('/profile');
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final String location = GoRouterState.of(context).uri.toString();
+    final int selectedIndex = _getSelectedIndex(location);
+
     return Padding(
       padding: const EdgeInsets.only(left: 50, right: 50, bottom: 30),
       child: Container(
@@ -31,9 +52,9 @@ class _BottomNavigatorState extends State<BottomNavigatorNews> {
           color: AppColors.text,
           boxShadow: [
             BoxShadow(
-              color: Theme.of(context).colorScheme.onInverseSurface.withAlpha(200), 
-              blurRadius: 10,
-              spreadRadius: 45, 
+              color: Theme.of(context).colorScheme.onInverseSurface.withAlpha(200),
+              blurRadius: 50,
+              spreadRadius: 20,
               offset: const Offset(0, 30),
             ),
           ],
@@ -41,29 +62,18 @@ class _BottomNavigatorState extends State<BottomNavigatorNews> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: List.generate(icons.length, (index) {
-            bool isSelected = index == selectedIndex;
+            final bool isSelected = index == selectedIndex;
             return GestureDetector(
-              onTap: () {
-                setState(() {
-                  selectedIndex = index;
-                });
-                if (index == icons.length - 1) {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ProfilePage(),
-                    ),
-                  );
-                }
-              },
+              onTap: () => _onItemTapped(context, index),
               child: ColorFiltered(
                 colorFilter: isSelected
-                    ? const ColorFilter.mode(AppColors.white, BlendMode.srcIn)
-                    : const ColorFilter.mode(
-                        AppColors.container,
-                        BlendMode.srcIn,
-                      ),
-                child: Image.asset(icons[index], width: 25, height: 22),
+                    ? const ColorFilter.mode(AppColors.white, BlendMode.srcIn) 
+                    : const ColorFilter.mode(AppColors.container, BlendMode.srcIn), 
+                child: Image.asset(
+                  icons[index],
+                  width: 25,
+                  height: 22,
+                ),
               ),
             );
           }),

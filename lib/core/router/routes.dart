@@ -14,4 +14,19 @@ class Routes {
   static const followers = "/followers";
   static const home = "/home";
   static const splash = "/splash";
+  static const profile = "/profile";
+  static const cooking_level = "/cooking_level";
+  static const chef_detail = "/chef-detail";
+  static const recipe_details = "/recipe-details";
+  static const reviews = "/reviews";
+  static const leave = "/leave";
+  static const forgot = "/forgot";
+  static const got_email = "/got_mail";
+  static const forgot2 = "/forgot2";
+  static const shared = "/shared";
+  static const edit = "/edit";
+ static const notificationPages = "/notificationPages";
+ static const language = "/language";
+ static const help = "/help";
+ static const policy = "/policy";
   }

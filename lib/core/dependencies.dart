@@ -12,7 +12,6 @@ import 'package:homework_34/features/category/managers/category_view_model.dart'
 import 'package:homework_34/features/common/managers/theme_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
-
 import '../data/repostories/categories_repostory.dart';
 import '../data/repostories/onboarding_repostory.dart';
 

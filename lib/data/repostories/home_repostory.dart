@@ -23,21 +23,6 @@ class Repository {
       },
     );
   }
-  // Future<Result<List<MenyuModels>>> getCategories() async {
-  //   final result = await apiClient.get<List>("admin/categories/list");
-  //   return result.fold(
-  //     (error) => Result.error(error),
-  //     (data) {
-  //       try {
-  //         return Result.ok(
-  //           (data as List).map((e) => MenyuModels.fromJson(e)).toList(),
-  //         );
-  //       } catch (e) {
-  //         return Result.error(Exception("Parsing error (Menyu): $e"));
-  //       }
-  //     },
-  //   );
-  // }
   Future<Result<List<ResentlyModels>>> getRecently() async {
     final result = await apiClient.get<List>("/recipes/list?Page=2&Limit=2");
     return result.fold(

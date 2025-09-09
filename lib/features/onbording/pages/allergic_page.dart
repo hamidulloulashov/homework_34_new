@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart' show GoRouter;
 import 'package:homework_34/core/utils/app_colors.dart';
 import 'package:homework_34/data/repostories/onboarding_repostory.dart';
-import 'package:homework_34/features/onbording/managers/cusins_view_model.dart';
-import 'package:homework_34/features/onbording/widgets/proress_widget.dart';
+import 'package:homework_34/features/onbording/managers/alergic_view_model.dart';
 import 'package:provider/provider.dart';
 import 'package:homework_34/core/client.dart';
 
@@ -14,40 +13,38 @@ class Allergic extends StatelessWidget {
   Widget build(BuildContext context) {
     final apiClient = ApiClient(); 
     final repository = OnboardingRepository(apiClient: apiClient);
-    
     return ChangeNotifierProvider(
-      create: (context) => CusinsViewModel(repository: repository),
+      create: (context) => AlergicViewModel(repository: repository),
       builder: (context, child) => Scaffold(
         body: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const ProgressBarWidget(currentStep: 3),
-            
-            const Padding(
+          
+             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Text(
                 "¿You have any allergic?",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.inverseSurface,
                   fontWeight: FontWeight.w600,
                   fontSize: 22,
                 ),
               ),
             ),
             const SizedBox(height: 30),
-            const Padding(
+           Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Text(
                 "Lorem ipsum dolor sit amet consectetur. Leo ornare\nullamcorper viverra ultrices in.",
                 style: TextStyle(
-                  color: Colors.white,
+                  color: Theme.of(context).colorScheme.inverseSurface,
                   fontWeight: FontWeight.w400,
                 ),
               ),
             ),
             const SizedBox(height: 30),
             Expanded(
-              child: Consumer<CusinsViewModel>(
+              child: Consumer<AlergicViewModel>(
                 builder: (context, vm, child) {
                   if (vm.isLoading) {
                     return const Center(
@@ -67,21 +64,21 @@ class Allergic extends StatelessWidget {
                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 3,
                     ),
-                    itemCount: vm.cusins.length,
+                    itemCount: vm.allergic.length,
                     itemBuilder: (context, index) => Column(
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(12),
                           child: Image.network(
-                            vm.cusins[index].image,
+                            vm.allergic[index].image,
                             width: 99,
                             height: 99,
                             fit: BoxFit.cover,
                           ),
                         ),
                         Text(
-                          vm.cusins[index].title,
-                          style: const TextStyle(color: Colors.white),
+                          vm.allergic[index].title,
+                          style:  TextStyle(color: Theme.of(context).colorScheme.inverseSurface,),
                         ),
                       ],
                     ),

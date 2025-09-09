@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:homework_34/core/utils/app_colors.dart';
 import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
 import 'package:homework_34/features/common/widgets/bottom_navigator_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:homework_34/features/category/managers/category_view_model.dart';
-import 'package:homework_34/features/category/pages/details.dart';
-
 class CategoryPage extends StatelessWidget {
   const CategoryPage({super.key, required this.name});
   final String name;
@@ -13,11 +12,12 @@ class CategoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       appBar: CustomAppBar(
         title: "Categories",
         arrow: "assets/arrow.png",
-        first: "assets/notifaction.png",
-        second: "assets/search.png",
+        first: "first",
+        second: "search",
         containerColor: AppColors.container,
       ),
       body: Consumer<CategoryViewModel>(
@@ -58,16 +58,14 @@ class CategoryPage extends StatelessWidget {
               final cat = vm.categories[index];
               return GestureDetector(
                 onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => DetailsPage(
-                        categoryId: cat.id,
-                        categoryName: cat.title,
-                      ),
-                    ),
-                  );
-                },
+  context.push(
+    "/details/${cat.id}",
+    extra: {
+      "categoryName": cat.title,
+    },
+  );
+},
+
                 child: Column(
                   children: [
                     ClipRRect(

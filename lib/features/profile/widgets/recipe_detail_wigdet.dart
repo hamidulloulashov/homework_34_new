@@ -35,6 +35,7 @@ class RecipeDetailWidget extends StatelessWidget {
             mainAxisSpacing: 12,
             crossAxisSpacing: 12,
             childAspectRatio: 0.75,
+          
           ),
           itemCount: viewModel.recipes.length > 2
               ? viewModel.recipes.length - 2
@@ -60,6 +61,7 @@ class _GridRecipeCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      color: Theme.of(context).colorScheme.surfaceContainer,
       elevation: 4,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

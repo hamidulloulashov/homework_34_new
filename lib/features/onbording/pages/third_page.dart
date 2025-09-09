@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:homework_34/core/router/routes.dart';
 import 'package:homework_34/core/utils/app_colors.dart';
 import 'package:homework_34/features/onbording/managers/third_view_model.dart';
-import 'package:homework_34/features/onbording/pages/cooking_livel_page.dart';
 import 'package:provider/provider.dart';
-
 class ThirdPage extends StatelessWidget {
   const ThirdPage({super.key});
   @override
@@ -11,6 +11,7 @@ class ThirdPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => ThirdViewModel(),
       builder: (context, child) => Scaffold(
+        extendBody: true,
         body: Consumer<ThirdViewModel>(
           builder: (context, vm, child) {
             if (vm.third.isEmpty) {
@@ -63,12 +64,7 @@ class ThirdPage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(bottom: 30),
                   child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => const CookingLivel()),
-                      );
-                    },
+                    onDoubleTap: () =>  GoRouter.of(context).go('/login'),
                     child: Container(
                       width: 162,
                       height: 45,
@@ -91,20 +87,23 @@ class ThirdPage extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(bottom: 30),
-                  child: Container(
-                    width: 162,
-                    height: 45,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(23),
-                      color: AppColors.container,
-                    ),
-                    child: const Center(
-                      child: Text(
-                        "I've been here",
-                        style: TextStyle(
-                          color: AppColors.icons,
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
+                  child: GestureDetector(
+                 onDoubleTap: () => GoRouter.of(context).go(Routes.cooking_level),
+                    child: Container(
+                      width: 162,
+                      height: 45,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(23),
+                        color: AppColors.container,
+                      ),
+                      child: const Center(
+                        child: Text(
+                          "I've been here",
+                          style: TextStyle(
+                            color: AppColors.icons,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                     ),

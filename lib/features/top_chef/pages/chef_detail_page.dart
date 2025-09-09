@@ -28,6 +28,7 @@ class _ChefDetailState extends State<ChefDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       appBar: CustomAppBar(
   title: widget.username,
   arrow: "assets/arrow.png",

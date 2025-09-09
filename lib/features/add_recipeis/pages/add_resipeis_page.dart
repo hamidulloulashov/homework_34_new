@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:homework_34/core/utils/app_colors.dart';
+import 'package:homework_34/features/add_recipeis/widgets/delate_add_resipe.dart';
+import 'package:homework_34/features/add_recipeis/widgets/publish_add_resipe.dart';
 import 'package:homework_34/features/common/widgets/bottom_navigator_widget.dart';
 import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
 class AddResipeisPage extends StatefulWidget {
@@ -132,7 +134,7 @@ class _RecipeCreatorPageState extends State<AddResipeisPage>
           children: [
             Icon(Icons.check_circle, color: Colors.white),
             SizedBox(width: 8),
-            Text('Recipe saved successfully! 🎉'),
+            Text('Recipe saved successfully!'),
           ],
         ),
         backgroundColor: Colors.green,
@@ -302,6 +304,7 @@ class _RecipeCreatorPageState extends State<AddResipeisPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       appBar: CustomAppBar(title: "Create Recipe",arrow: "assets/arrow.png",),
       body: FadeTransition(
         opacity: _fadeAnimation,
@@ -318,45 +321,66 @@ class _RecipeCreatorPageState extends State<AddResipeisPage>
                     padding: const EdgeInsets.only(left: 10),
                     child: Row(
                       children: [
-                        Container(
-                          width: 177,
-                          height: 27,
-                        
-                          decoration: BoxDecoration(
-                            color: AppColors.container,
-                            borderRadius: BorderRadius.circular(14)
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Publish',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: AppColors.text,
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                                letterSpacing: 1.5,
+                        GestureDetector(
+                          onTap: () {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => PublishAddResipe(),
+    );
+  },
+                          child: Container(
+                            width: 177,
+                            height: 27,
+                            decoration: BoxDecoration(
+                              color: AppColors.container,
+                              borderRadius: BorderRadius.circular(14)
+                            ),
+                            child: Center(
+                              child: Text(
+                                'Publish',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: AppColors.text,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 1.5,
+                                ),
                               ),
                             ),
                           ),
                         ),
                         SizedBox(width: 12,),
-                        Container(
-                          width: 177,
-                          height: 27,
-                        
-                          decoration: BoxDecoration(
-                             color: AppColors.container,
-                            borderRadius: BorderRadius.circular(14)
-                          ),
-                          child: Center(
-                            child: Text(
-                              'Delete',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: AppColors.text,
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                               
+                        GestureDetector(
+                            onTap: () {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => DelateAddResipe(),
+    );
+  },
+                          child: Container(
+                            width: 177,
+                            height: 27,
+                          
+                            decoration: BoxDecoration(
+                               color: AppColors.container,
+                              borderRadius: BorderRadius.circular(14)
+                            ),
+                            child: GestureDetector(
+                              child: Center(
+                                child: Text(
+                                  'Delete',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: AppColors.text,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                   
+                                  ),
+                                ),
                               ),
                             ),
                           ),

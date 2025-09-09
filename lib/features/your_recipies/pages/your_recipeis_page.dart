@@ -23,7 +23,8 @@ class YourRecipeisPage extends StatelessWidget {
       return const Center(child: Text("Hech qanday recipe topilmadi"));
     }
     return Scaffold(
-      appBar: CustomAppBar(arrow: 'assets/arrow.png',first: 'assets/notifaction.png',second: 'assets/search.png',containerColor: AppColors.container,),
+      extendBody: true,
+      appBar: CustomAppBar(arrow: 'assets/arrow.png',first: 'first',second: 'search',containerColor: AppColors.container,),
       body: Column(
         children: [
           Container(
@@ -53,7 +54,6 @@ class YourRecipeisPage extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 15),
                     child: Card(
-                      
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),

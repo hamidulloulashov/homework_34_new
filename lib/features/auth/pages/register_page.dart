@@ -98,7 +98,7 @@ class RegisterPage extends StatelessWidget {
                       Text(
                         "By continuing, you agree to\nTerms of Use and Privacy Policy.",
                         textAlign: TextAlign.center,
-                        style: TextStyle(color: AppColors.white),
+                        style: TextStyle(color: Theme.of(context).colorScheme.inverseSurface,),
                       ),
                       const SizedBox(height: 40),
                       Padding(
@@ -188,7 +188,7 @@ class RegisterPage extends StatelessWidget {
                         children: [
                           Text(
                             "Already have an account? ",
-                            style: TextStyle(color: AppColors.white),
+                            style: TextStyle(color: Theme.of(context).colorScheme.inverseSurface,),
                           ),
                           GestureDetector(
                             onTap: () {

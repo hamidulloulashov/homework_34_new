@@ -9,7 +9,6 @@ class MostRepository {
 
   Future<Result<List<MostModel>>> getTrendingRecipes() async {
     final result = await apiClient.get<dynamic>('/recipes/trending-recipe');
-
     return result.fold(
       (error) => Result.error(error),
       (data) {

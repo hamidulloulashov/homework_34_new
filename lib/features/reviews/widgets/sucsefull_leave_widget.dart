@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:homework_34/core/utils/app_colors.dart';
 
 class SucsefullLeaveWidget extends StatelessWidget {
@@ -42,12 +43,29 @@ class SucsefullLeaveWidget extends StatelessWidget {
           ),
           SizedBox(height: 30,),
           Container(
-              width: 207,
-              height: 45,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(22), color: AppColors.text),
-              child: Center(child: Text("Go to home", style: TextStyle(color: AppColors.white, fontSize: 20, fontWeight: FontWeight.w600),)),
-             ),
-        ],
+  width: 207,
+  height: 45,
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(22),
+    color: AppColors.text,
+  ),
+  child: Center(
+    child: GestureDetector(
+      onTap: () {
+        context.go('/home'); 
+      },
+      child: Text(
+        "Go to home",
+        style: TextStyle(
+          color: AppColors.white,
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    ),
+  ),
+),
+        ]
       ),
     );
   }

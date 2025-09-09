@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:homework_34/core/utils/app_colors.dart';
 import 'package:homework_34/features/common/widgets/custom_appbar_widget.dart';
-import 'package:homework_34/features/category/pages/recipe_deatils.dart';
 import 'package:homework_34/features/common/widgets/bottom_navigator_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:homework_34/features/category/managers/details_view_model.dart';
@@ -55,11 +55,12 @@ class _DetailsPageState extends State<DetailsPage> {
       child: Consumer<DetailsViewModel>(
         builder: (context, vm, _) {
           return Scaffold(
+            extendBody: true,
             appBar: CustomAppBar(
               title: selectedCategoryName,
               arrow: "assets/arrow.png",  
-              first: "assets/notifaction.png",
-              second: "assets/search.png",
+              first: "first",
+              second: "search",
               containerColor: AppColors.container,
             ),
             body: Column(
@@ -133,14 +134,12 @@ class _DetailsPageState extends State<DetailsPage> {
                                     final recipe = vm.recipes[index];
                                     return GestureDetector(
                                       onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                RecipeDetailsPage(recipe: recipe),
-                                          ),
-                                        );
-                                      },
+  context.push(
+    '/recipe-details',
+    extra: recipe,
+  );
+},
+
                                       child: Container(
                                         decoration: BoxDecoration(
                                           color: Colors.white,
